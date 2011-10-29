@@ -1,61 +1,63 @@
 
-body{
-	margin:0px;
-	padding:0px;
-
-}
-
-#titlebar{
-	background: #F1F1F1;
-	border-bottom: 1px solid #D2D2D2;
-	border-top: 1px solid #D2D2D2;
-	clear: both;
-	min-width: 960px;
-	/*height: 60px;*/
-	height:100px;
-	position: relative;
-	width: 100%;
-}
-
-#titlebar h1{
-	text-align: center;
-	margin-top:25px;
-}
-
-#div_article{
-	width:960px;
-	margin:25px auto;
-	font-size:25px;
-}
-
-#div_article a{
+window.onload = function(){
 	
-	text-decoration:none;
+}
+
+function setIconPath(path){
+	document.getElementById("favico").setAttribute("src",path);
+}
+
+function setDate(date){
+	var node = document.getElementById("date");
+}
+
+function setTitle(title){
+	document.getElementById("heading").innerText=title;
+}
+
+var index = 0;
+
+function removeBlurEffect(index){
+	var p = document.getElementsByTagName('p')[index];
+	p.setAttribute("class","blur_in");
+	var as = p.getElementsByTagName('a');
+		for (var i = 0; i < as.length; i++) {
+			as[i].setAttribute('class', 'blur_in');
+		};	
+}
+
+function blurEverything(){
+	var pis = document.getElementsByTagName('p');
+	for (var i = 0; i < pis.length; i++) {
+		pis[i].setAttribute('class', 'blur_out');
+		var as = pis[i].getElementsByTagName('a');
+		for (var j = 0; j < as.length; j++) {
+			as[j].setAttribute('class', 'blur_out');
+		};
+	};
+
+}
+
+var interval;
+var speed = 10;
+var scrollDest;
+
+function scrollToParagraph(index){
+	var node = document.getElementsByTagName('p')[index];
+	var offtop = node.offsetTop;
+	var height = (node.offsetHeight);
+	var screenheight = (window.innerHeight);
+	
+	scrollDest = offtop + (height / 2) - (screenheight / 2);
+	
+	window.scrollTo(0,scrollDest);
+	
 }
 
 
-.blur_out{
-	-webkit-animation-name: blur-out;
-    -webkit-animation-duration: 4s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-fill-mode: forwards;
+function highlight(index){
+	blurEverything();
+	removeBlurEffect(index);
+	scrollToParagraph(index);
 }
-
-.blur_in{
-	-webkit-animation-name: blur-in;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-iteration-count: 1;
- 
-}
-
-@-webkit-keyframes blur-out {
-    0% { text-shadow: #111 0 0 0px; color: rgba(0%, 0%, 0%, 0)}
-    100% { text-shadow: #111 0 0 20px; color: rgba(0%, 0%, 0%, 0)}
-}
-
-@-webkit-keyframes blur-in {
-    0% { text-shadow: #111 0 0 20px; color: rgba(0%, 0%, 0%, 0)}
-    100% { text-shadow: #111 0 0 0px; color: rgba(0%, 0%, 0%, 0)}
-}
-
 
