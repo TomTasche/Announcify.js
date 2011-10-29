@@ -29,6 +29,7 @@
 
 	<div id="titlebar">
 		<h1 id="heading"></h1>
+		<a href="javascript:highlight(0);">READ</a>	
 	</div>
   </body>
 </html>
