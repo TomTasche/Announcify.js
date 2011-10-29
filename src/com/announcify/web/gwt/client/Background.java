@@ -12,6 +12,7 @@ public class Background implements EntryPoint {
 
 
 	private void onBrowserActionClicked(String url) {
+		// TODO: lang
 		Window.open(getHtmlUrl(this) + "?url=" + url, "announcify.web", null);
 	}
 
