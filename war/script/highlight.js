@@ -4,7 +4,7 @@ window.onload = function(){
 }
 
 function setIconPath(path){
-	document.getElementById("favico").setAttribute("src",path);
+	//document.getElementById("favico").setAttribute("src",path);
 }
 
 function setDate(date){
