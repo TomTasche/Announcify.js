@@ -19,7 +19,7 @@
   ],
 
   /* http://code.google.com/chrome/extensions/options.html */
-  "options_page": "html/options.html",
+  "options_page": "html/options/options.html",
 
   /* http://code.google.com/chrome/extensions/background_pages.html */
   "background_page": "html/background.html"
