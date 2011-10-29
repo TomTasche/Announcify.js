@@ -11,11 +11,7 @@ window.addEvent("domready", function () {
 		"label": i18n.get("voice"),
 		"options": {
 			values: [
-				["1", "voice 1" ],
-				["2", "voice 2" ],
-				["3", "voice 3" ],
-				["4", "voice 4" ],
-				["5", "voice 5" ]
+				["1", "default" ]
 			],
 		},
 	});
@@ -60,8 +56,29 @@ window.addEvent("domready", function () {
 		}
 	};
 	
-	settings.manifest.load.addEvent("action", function () {
-		chrome.tts.getVoices(addVoices);
+	// button to reload voices
+	//settings.manifest.load.addEvent("action", function () {
+	//	chrome.tts.getVoices(addVoices);
+	//});
+	
+	settings.manifest.save_settings.addEvent("action", function () {
+		for (var f in settings.manifest) {
+			var s = settings.manifest[f]; 
+			console.log("storing value: " + s);
+			try {
+				localStorage[f] = s.get();
+			} catch (e) {
+				console.log(e);
+			}
+		}	
+	});
+
+	settings.manifest.test.addEvent("action", function () {
+		chrome.tts.speak("Announcify is great", {
+				"rate": settings.manifest["rate"].get(),
+				"pitch": settings.manifest["pitch"].get(),
+				"volume": settings.manifest["volume"].get()
+		});
 	});
 	
 	console.log("loading voices");

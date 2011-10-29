@@ -3,13 +3,14 @@ this.manifest = {
     "icon": "../../img/icon_48.png",
     "settings": [
     	// general
+    	/* button to reload voices
         {
             "tab": i18n.get("tts"),
             "group": i18n.get("general"),
             "name": "load",
             "type": "button",
             "text": "Reload voices"
-        },
+        },*/
         
         {
             "tab": i18n.get("tts"),
@@ -24,6 +25,31 @@ this.manifest = {
             "displayModifier": function (value) {
                 return (value * 100).floor() + "%";
             }
+        },
+
+        {
+            "tab": i18n.get("tts"),
+            "group": i18n.get("general"),
+            "name": "test",
+            "type": "button",
+            "label": i18n.get("test_label"),
+            "text": i18n.get("test")
+        },
+
+        {
+            "tab": i18n.get("tts"),
+            "group": i18n.get("general"),
+            "name": "save_settings",
+            "type": "button",
+            "text": i18n.get("save_settings")
+        },
+
+        {
+            "tab": i18n.get("tts"),
+            "group": i18n.get("general"),
+            "name": "reload_settings",
+            "type": "button",
+            "text": i18n.get("reload_settings")
         },
 
         // details
@@ -61,14 +87,6 @@ this.manifest = {
             "displayModifier": function (value) {
                 return (value * 100).floor() / 100 + "x";
             }
-        },
-        {
-            "tab": i18n.get("tts"),
-            "group": i18n.get("details"),
-            "name": "test",
-            "type": "button",
-            "label": i18n.get("test_label"),
-            "text": i18n.get("test")
         }
     ]
         /*

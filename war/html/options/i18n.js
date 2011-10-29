@@ -27,6 +27,10 @@ this.i18n = {
         "en": "Details",
         "de": "Details"
     },
+    "details": {
+        "en": "Details",
+        "de": "Details"
+    },
 
     // main
     "voice": {
@@ -36,6 +40,14 @@ this.i18n = {
     "volume": {
         "en": "Volume",
         "de": "Lautstärke"
+    },
+    "test": {
+        "en": "Speak",
+        "de": "Sprechen"
+    },
+    "test_label": {
+        "en": "Test voice settings",
+        "de": "Stimmeinstellungen testen"
     },
     
     // details
@@ -51,12 +63,17 @@ this.i18n = {
         "en": "Pitch",
         "de": "Tonhöhe"
     },
-    "test": {
-        "en": "Speak",
-        "de": "Sprechen"
+    
+	// settings
+	"save_settings": {
+        "en": "Save Settings",
+        "de": "Einstellungen speichern"
     },
-    "test_label": {
-        "en": "Test voice settings",
-        "de": "Stimmeinstellungen testen"
-    }
+    "reload_settings": {
+        "en": "Reset to defaults",
+        "de": "Ursprüngliche Einstellungen wiederherstellen"
+    },
+    
+
+    
 };
