@@ -32,13 +32,10 @@ public class ChromeTtsEngine implements TtsEngine {
 		chrome.tts.speak(text);
 	}-*/;
 
-	public native void speak(String text, boolean enqueue) /*-{
-		console.log("speak");
-		console.log(text);
-		
+	public native void speak(UtteranceCompletedListener completedListener, String text, boolean enqueue) /*-{
 		chrome.tts.speak(text, {"enqueue": enqueue, onEvent: function(event) {
 			if (event.type == "end") {
-				utteranceListener.@com.announcify.web.gwt.tts.UtteranceCompletedListener::onUtteranceCompleted();
+				completedListener.@com.announcify.web.gwt.tts.UtteranceCompletedListener::onUtteranceCompleted()();
 			} else if (event.type == "error") {
 				console.log('error: ' + event.errorMessage);
 				

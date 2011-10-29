@@ -26,11 +26,15 @@ public class Announcificator implements UtteranceCompletedListener {
 	}
 
 
+	public native void stop() /*-{
+		chrome.tts.stop();
+	}-*/;
+	
 	public void announcify() {
-//		highlight(lastIndex++);
+		highlight(lastIndex++);
 
 		for (int i = 0; i < paragraphs.getLength(); i++) {
-			TTS_ENGINE.speak(paragraphs.getItem(i).getInnerText(), true);
+			TTS_ENGINE.speak(this, paragraphs.getItem(i).getInnerText(), true);
 		}
 	}
 
