@@ -63,6 +63,10 @@ this.i18n = {
         "en": "Pitch",
         "de": "Tonhöhe"
     },
+    "pitch_description": {
+    	"en": "Speaking pitch between 0 and 2 inclusive, with 0 being lowest and 2 being highest. 1.0 corresponds to a voice's default pitch.",
+    	"de": "Die Sprachgeschwindigkeit ist relativ zur Ausgangsgeschwindigkeit für die jeweilige Stimme. Manche Stimmen können nicht über oder unter einen Bestimmten Wert hinaus gesprochen werden. Beispielsweise kann man hier vielleicht ein hohe Geschwindigkeit von 5 bis 7 einstellen, die Stimme wird aber nicht schneller als mit der Geschwindigkeit 3 sprechen."
+    },
     
 	// settings
 	"save_settings": {

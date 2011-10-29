@@ -74,7 +74,7 @@ window.addEvent("domready", function () {
 	});
 
 	settings.manifest.test.addEvent("action", function () {
-		chrome.tts.speak("Announcify is great", {
+		chrome.tts.speak("We really want to win that Chromebook! Clap now, please.", {
 				"rate": settings.manifest["rate"].get(),
 				"pitch": settings.manifest["pitch"].get(),
 				"volume": settings.manifest["volume"].get()

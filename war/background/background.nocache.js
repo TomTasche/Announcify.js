@@ -1,5 +1,5 @@
 function background(){
-  var $intern_0 = '', $intern_35 = '" for "gwt:onLoadErrorFn"', $intern_33 = '" for "gwt:onPropertyErrorFn"', $intern_21 = '"><\/script>', $intern_10 = '#', $intern_64 = '.cache.html', $intern_12 = '/', $intern_57 = '225F8BF6DA9E8DCFDCF2B7A8D5451CBB', $intern_58 = '9A2A738C1A621AC35C146A84682B9720', $intern_63 = ':', $intern_27 = '::', $intern_72 = '<script defer="defer">background.onInjectionDone(\'background\')<\/script>', $intern_20 = '<script id="', $intern_30 = '=', $intern_11 = '?', $intern_44 = 'ActiveXObject', $intern_32 = 'Bad handler "', $intern_59 = 'CF83DAC10CB8BFC06A876984939B67FA', $intern_45 = 'ChromeTab.ChromeFrame', $intern_60 = 'D54DF75430134B8299AAB8ABB4A08913', $intern_71 = 'DOMContentLoaded', $intern_61 = 'E8122413DAD5ACFB34BA5E5CAE5D48F0', $intern_62 = 'FD18E24E98CEE48C48B3D7F5C89A3C83', $intern_22 = 'SCRIPT', $intern_19 = '__gwt_marker_background', $intern_1 = 'background', $intern_17 = 'background.nocache.js', $intern_26 = 'background::', $intern_23 = 'base', $intern_15 = 'baseUrl', $intern_4 = 'begin', $intern_3 = 'bootstrap', $intern_43 = 'chromeframe', $intern_14 = 'clear.cache.gif', $intern_29 = 'content', $intern_9 = 'end', $intern_51 = 'gecko', $intern_52 = 'gecko1_8', $intern_5 = 'gwt.codesvr=', $intern_6 = 'gwt.hosted=', $intern_7 = 'gwt.hybrid', $intern_65 = 'gwt/clean/clean.css', $intern_34 = 'gwt:onLoadErrorFn', $intern_31 = 'gwt:onPropertyErrorFn', $intern_28 = 'gwt:property', $intern_70 = 'head', $intern_55 = 'hosted.html?background', $intern_69 = 'href', $intern_50 = 'ie6', $intern_49 = 'ie8', $intern_48 = 'ie9', $intern_36 = 'iframe', $intern_13 = 'img', $intern_37 = "javascript:''", $intern_66 = 'link', $intern_54 = 'loadExternalRefs', $intern_24 = 'meta', $intern_39 = 'moduleRequested', $intern_8 = 'moduleStartup', $intern_47 = 'msie', $intern_25 = 'name', $intern_41 = 'opera', $intern_38 = 'position:absolute;width:0;height:0;border:none', $intern_67 = 'rel', $intern_46 = 'safari', $intern_16 = 'script', $intern_56 = 'selectingPermutation', $intern_2 = 'startup', $intern_68 = 'stylesheet', $intern_18 = 'undefined', $intern_53 = 'unknown', $intern_40 = 'user.agent', $intern_42 = 'webkit';
+  var $intern_0 = '', $intern_35 = '" for "gwt:onLoadErrorFn"', $intern_33 = '" for "gwt:onPropertyErrorFn"', $intern_21 = '"><\/script>', $intern_10 = '#', $intern_64 = '.cache.html', $intern_12 = '/', $intern_57 = '225F8BF6DA9E8DCFDCF2B7A8D5451CBB', $intern_58 = '9A2A738C1A621AC35C146A84682B9720', $intern_63 = ':', $intern_27 = '::', $intern_66 = '<script defer="defer">background.onInjectionDone(\'background\')<\/script>', $intern_20 = '<script id="', $intern_30 = '=', $intern_11 = '?', $intern_44 = 'ActiveXObject', $intern_32 = 'Bad handler "', $intern_59 = 'CF83DAC10CB8BFC06A876984939B67FA', $intern_45 = 'ChromeTab.ChromeFrame', $intern_60 = 'D54DF75430134B8299AAB8ABB4A08913', $intern_65 = 'DOMContentLoaded', $intern_61 = 'E8122413DAD5ACFB34BA5E5CAE5D48F0', $intern_62 = 'FD18E24E98CEE48C48B3D7F5C89A3C83', $intern_22 = 'SCRIPT', $intern_19 = '__gwt_marker_background', $intern_1 = 'background', $intern_17 = 'background.nocache.js', $intern_26 = 'background::', $intern_23 = 'base', $intern_15 = 'baseUrl', $intern_4 = 'begin', $intern_3 = 'bootstrap', $intern_43 = 'chromeframe', $intern_14 = 'clear.cache.gif', $intern_29 = 'content', $intern_9 = 'end', $intern_51 = 'gecko', $intern_52 = 'gecko1_8', $intern_5 = 'gwt.codesvr=', $intern_6 = 'gwt.hosted=', $intern_7 = 'gwt.hybrid', $intern_34 = 'gwt:onLoadErrorFn', $intern_31 = 'gwt:onPropertyErrorFn', $intern_28 = 'gwt:property', $intern_55 = 'hosted.html?background', $intern_50 = 'ie6', $intern_49 = 'ie8', $intern_48 = 'ie9', $intern_36 = 'iframe', $intern_13 = 'img', $intern_37 = "javascript:''", $intern_54 = 'loadExternalRefs', $intern_24 = 'meta', $intern_39 = 'moduleRequested', $intern_8 = 'moduleStartup', $intern_47 = 'msie', $intern_25 = 'name', $intern_41 = 'opera', $intern_38 = 'position:absolute;width:0;height:0;border:none', $intern_46 = 'safari', $intern_16 = 'script', $intern_56 = 'selectingPermutation', $intern_2 = 'startup', $intern_18 = 'undefined', $intern_53 = 'unknown', $intern_40 = 'user.agent', $intern_42 = 'webkit';
   var $wnd = window, $doc = document, $stats = $wnd.__gwtStatsEvent?function(a){
     return $wnd.__gwtStatsEvent(a);
   }
@@ -334,16 +334,9 @@ function background(){
   function onBodyDone(){
     if (!bodyDone) {
       bodyDone = true;
-      if (!__gwt_stylesLoaded[$intern_65]) {
-        var l = $doc.createElement($intern_66);
-        __gwt_stylesLoaded[$intern_65] = l;
-        l.setAttribute($intern_67, $intern_68);
-        l.setAttribute($intern_69, base + $intern_65);
-        $doc.getElementsByTagName($intern_70)[0].appendChild(l);
-      }
       maybeStartModule();
       if ($doc.removeEventListener) {
-        $doc.removeEventListener($intern_71, onBodyDone, false);
+        $doc.removeEventListener($intern_65, onBodyDone, false);
       }
       if (onBodyDoneTimerId) {
         clearInterval(onBodyDoneTimerId);
@@ -352,7 +345,7 @@ function background(){
   }
 
   if ($doc.addEventListener) {
-    $doc.addEventListener($intern_71, function(){
+    $doc.addEventListener($intern_65, function(){
       maybeInjectFrame();
       onBodyDone();
     }
@@ -367,7 +360,7 @@ function background(){
   , 50);
   $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_3, millis:(new Date).getTime(), type:$intern_9});
   $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_54, millis:(new Date).getTime(), type:$intern_4});
-  $doc.write($intern_72);
+  $doc.write($intern_66);
 }
 
 background();

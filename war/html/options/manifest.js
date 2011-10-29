@@ -87,7 +87,14 @@ this.manifest = {
             "displayModifier": function (value) {
                 return (value * 100).floor() / 100 + "x";
             }
-        }
+        },
+        {
+            "tab": i18n.get("tts"),
+            "group": i18n.get("details"),
+            "name": "pitch-description",
+            "type": "description",
+            "text": i18n.get("pitch_description")
+        },
     ]
         /*
     "alignment": [
