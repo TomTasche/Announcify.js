@@ -1,81 +1,61 @@
 
-window.onload = function(){
+body{
+	margin:0px;
+	padding:0px;
+
+}
+
+#titlebar{
+	background: #F1F1F1;
+	border-bottom: 1px solid #D2D2D2;
+	border-top: 1px solid #D2D2D2;
+	clear: both;
+	min-width: 960px;
+	/*height: 60px;*/
+	height:100px;
+	position: relative;
+	width: 100%;
+}
+
+#titlebar h1{
+	text-align: center;
+	margin-top:25px;
+}
+
+#div_article{
+	width:960px;
+	margin:25px auto;
+	font-size:25px;
+}
+
+#div_article a{
 	
-}
-
-function setIconPath(path){
-	// document.getElementById("favico").setAttribute("src",path);
-}
-
-function setDate(date){
-	var node = document.getElementById("date");
-}
-
-function setTitle(title){
-	document.getElementById("heading").innerText=title;
-}
-
-var index = 0;
-
-function removeBlurEffect(index){
-	document.getElementsByTagName('p')[index].setAttribute("class","blur_in");	
-}
-
-function blurEverything(){
-	pis = document.getElementsByTagName('p');
-	for (var i = 0; i < pis.length; i++) {
-		pis[i].setAttribute('class', 'blur_out');
-	};
-}
-
-var interval;
-var speed = 10;
-var scrollDest;
-
-function scrollToParagraph(index){
-	var node = document.getElementsByTagName('p')[index];
-	var offtop = node.offsetTop;
-	var height = (node.offsetHeight);
-	var screenheight = (window.innerHeight);
-	
-	scrollDest = offtop + (height / 2) - (screenheight / 2);
-	
-	window.scrollTo(0,scrollDest);
-	
-}
-
-function makeScroll(){
-	window.scrollTo(0,scrollpoint);
-
-}
-
-function highlight(index){
-	blurEverything();
-	removeBlurEffect(index);
-	scrollToParagraph(index);
-}
-
-function setDate(date) {
-	
+	text-decoration:none;
 }
 
 
-
-// ------ KEY CONTROL --------
-function handleArrowKeys(evt) {
-    evt = (evt) ? evt : ((window.event) ? event : null);
-    if (evt) {
-        switch (evt.keyCode) {
-            case 38://up
-                highlight(index);
-                index--;
-                break;    
-            case 40://down
-                highlight(index);
-                index++;
-                break;    
-         }
-    }
+.blur_out{
+	-webkit-animation-name: blur-out;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
 }
 
-document.onkeyup = handleArrowKeys;
+.blur_in{
+	-webkit-animation-name: blur-in;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+ 
+}
+
+@-webkit-keyframes blur-out {
+    0% { text-shadow: #111 0 0 0px; color: rgba(0%, 0%, 0%, 0)}
+    100% { text-shadow: #111 0 0 20px; color: rgba(0%, 0%, 0%, 0)}
+}
+
+@-webkit-keyframes blur-in {
+    0% { text-shadow: #111 0 0 20px; color: rgba(0%, 0%, 0%, 0)}
+    100% { text-shadow: #111 0 0 0px; color: rgba(0%, 0%, 0%, 0)}
+}
+
+
