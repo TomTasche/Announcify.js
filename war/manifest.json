@@ -1,7 +1,7 @@
 {
   "name": "Announcify Your Web",
-  "version": "0.0",
-  "description": "Feel the Announcify experience on Wikipedia, TechCrunch and similar.",
+  "version": "0.1",
+  "description": "Listen to your web",
   "icons": { "16": "img/icon_16.png",
              "48": "img/icon_48.png",
             "128": "img/icon_128.png" },
@@ -22,5 +22,7 @@
   "options_page": "html/options/options.html",
 
   /* http://code.google.com/chrome/extensions/background_pages.html */
-  "background_page": "html/background.html"
+  "background_page": "html/background.html",
+  
+  "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src *; img-src 'self'"
 }

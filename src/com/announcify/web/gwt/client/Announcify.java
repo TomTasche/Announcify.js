@@ -12,7 +12,7 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
 
 public class Announcify implements EntryPoint {
 
-	private static final String API_TOKEN = "b72fef8077d8741f511f929533291683";
+    private static final String API_TOKEN = "b72fef8077d8741f511f929533291683";
 	private static final String API_URL = "https://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
 	private static final String API_URL_APPENDIX = "&html=true";
 	
@@ -42,9 +42,11 @@ public class Announcify implements EntryPoint {
 		Document.get().getBody().appendChild(articleElement);
 		
 		setArticleDate(article.getDate());
-		setArticleIcon(article.getIcon());
+		// setArticleIcon(article.getIcon());
 		setArticleTitle(article.getTitle());
-		
+
+        hideLoading();
+
 		announcificator = Announcificator.getAnnouncificator(Document.get());
 		announcificator.announcify();
 	}
@@ -76,5 +78,9 @@ public class Announcify implements EntryPoint {
 
 	private native void setArticleIcon(String icon) /*-{
 		return $wnd.setIconPath(icon);
+	}-*/;
+    
+    private native void hideLoading() /*-{
+    	return $wnd.hideLoading();
 	}-*/;
 }

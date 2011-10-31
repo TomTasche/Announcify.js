@@ -3,6 +3,11 @@ window.onload = function(){
 	
 }
 
+function hideLoading() {
+    loading = document.getElementById("img_loading");
+    document.removeChild(loading);
+}
+
 function setIconPath(path){
 	//document.getElementById("favico").setAttribute("src",path);
 }

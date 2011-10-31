@@ -31,6 +31,17 @@ window.addEvent("domready", function () {
 		
 		// reset current options
 		select.length = 0;
+        
+        if (voicesToAdd.length == 0) {
+            install = confirm("There's no Text-To-Speech engine installed on your system. Do you want to install one from Chrome Web Store?");
+            if (install == true) {
+                window.location.href = "https://chrome.google.com/webstore/detail/jcabofbhfighebggomnamjankeaplmhn";
+            } else {
+                window.alert("We can't make Announcify working for you if you don't have a Text-To-Speech engine installed. Sorry!");
+            }
+            
+            return;
+        }
 		
 		for (var i = 0; i < voicesToAdd.length; i++) {
 			v = voicesToAdd[i];
@@ -74,7 +85,7 @@ window.addEvent("domready", function () {
 	});
 
 	settings.manifest.test.addEvent("action", function () {
-		chrome.tts.speak("We really want to win that Chromebook! Clap now, please.", {
+		chrome.tts.speak("Thanks for using Announcify!", {
 				"rate": settings.manifest["rate"].get(),
 				"pitch": settings.manifest["pitch"].get(),
 				"volume": settings.manifest["volume"].get()
