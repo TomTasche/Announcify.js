@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>Announcify.web</title>
+    
+    <link rel="icon" type="image/x-icon" href="img/icon_16.ico" />
+
+    <script type="text/javascript" language="javascript" charset="utf-8">
+        chrome.browserAction.onClicked.addListener(function (tab) {
+            chrome.tabs.detectLanguage(tab.id, function (language) {
+                url = chrome.extension.getURL("html/announcify.html") + "?url=" + escape(tab.url) + "&lang=" + language;
+                
+                window.open(url, "announcify.web");
+            });
+		});
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>
