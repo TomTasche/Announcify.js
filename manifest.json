@@ -15,14 +15,15 @@
   // http://code.google.com/chrome/extensions/manifest.html#permissions
   "permissions": [
     "https://www.diffbot.com/api/*",
-    "tts" // http://code.google.com/chrome/extensions/tts.html
+    "tts", // http://code.google.com/chrome/extensions/tts.html
+    "tabs"
   ],
 
   /* http://code.google.com/chrome/extensions/options.html */
   "options_page": "html/options/options.html",
 
   /* http://code.google.com/chrome/extensions/background_pages.html */
-  "background_page": "html/background.html",
+  "background_page": "html/background.html"
   
-  "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src *; img-src 'self'"
+  /* "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src *; img-src 'self'" */
 }

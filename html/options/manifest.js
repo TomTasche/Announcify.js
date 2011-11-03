@@ -12,6 +12,19 @@ this.manifest = {
             "text": "Reload voices"
         },*/
         
+{
+		"tab": i18n.get("tts"),
+		"group": i18n.get("general"),
+		"name": "voices",
+		"type": "popupButton",
+		"label": i18n.get("voice"),
+		"options": {
+			values: [
+				["1", "default" ]
+			],
+		},
+	},
+
         {
             "tab": i18n.get("tts"),
             "group": i18n.get("general"),

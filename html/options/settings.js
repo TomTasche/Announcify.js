@@ -2,26 +2,14 @@ window.addEvent("domready", function () {
     var settings = new FancySettings(manifest.name, manifest.icon);
 	settings.manifest = {};
 
-	// create list of voices	
-	voiceSettings = settings.create({
-		"tab": i18n.get("tts"),
-		"group": i18n.get("general"),
-		"name": "voices",
-		"type": "popupButton",
-		"label": i18n.get("voice"),
-		"options": {
-			values: [
-				["1", "default" ]
-			],
-		},
-	});
-	
 	manifest.settings.each(function (params) {
 		output = settings.create(params);
 		if (params.name !== undefined) {
 			settings.manifest[params.name] = output;
 		}
 	});
+
+	voiceSettings = settings.manifest.voices;
     
 	ttsVoices = [];
 	
@@ -60,7 +48,6 @@ window.addEvent("domready", function () {
 			
 			try {
 				var result = select.add(option, null);
-				console.log("added: " + result);
 			} catch (e){
 				console.log(e);
 			}
@@ -75,7 +62,6 @@ window.addEvent("domready", function () {
 	settings.manifest.save_settings.addEvent("action", function () {
 		for (var f in settings.manifest) {
 			var s = settings.manifest[f]; 
-			console.log("storing value: " + s);
 			try {
 				localStorage[f] = s.get();
 			} catch (e) {
@@ -84,15 +70,27 @@ window.addEvent("domready", function () {
 		}	
 	});
 
+	settings.manifest.reload_settings.addEvent("action", function () {
+		var store = new Store("settings");
+		    for (var name in settings.manifest) {
+			var setting = settings.manifest[name];
+			if (typeof setting.set === "function")  {
+			    setting.set(store.get(setting.params.name));
+			}
+		    }
+	});
+
 	settings.manifest.test.addEvent("action", function () {
+console.log("rate" + settings.manifest["rate"].get());
+
 		chrome.tts.speak("Thanks for using Announcify!", {
+				"voiceName": settings.manifest["voices"].get(),
 				"rate": settings.manifest["rate"].get(),
 				"pitch": settings.manifest["pitch"].get(),
 				"volume": settings.manifest["volume"].get()
 		});
 	});
 	
-	console.log("loading voices");
 	chrome.tts.getVoices(addVoices);
 
 });
