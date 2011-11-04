@@ -6,16 +6,34 @@ window.onload = function() {
 
 	chrome.browserAction.onClicked.addListener(function (tab) {
 		chrome.tabs.detectLanguage(tab.id, function (language) {
-			url = chrome.extension.getURL("html/announcify.html") + "?url=" + escape(tab.url) + "&lang=" + language;
+			url = chrome.extension.getURL("html/announcify.web.html") + "?url=" + escape(tab.url) + "&lang=" + language;
 
 			window.open(url, "announcify.web");
 		});
 	});
 
-
-	if (localStorage.openedSettings == null) {
+	if (localStorage.openedSettings === null) {
 		window.open(chrome.extension.getURL("html/options/options.html"));
 
 		localStorage.openedSettings = true;
 	}
+    
+    if (localStorage.authorized === null) {
+        window.setInterval(100000, getAnnouncifications);
+    }
+};
+
+
+function getAnnouncifications() {
+    var url = SERVER_URL + "announcifications";
+    var request = {
+        'method': 'GET',
+        'parameters': {
+            // 'alt': 'json'
+        }
+    };
+    
+    oauth.sendSignedRequest(url, function(resp, xhr) {
+        announcify(resp);
+    }, request);
 }

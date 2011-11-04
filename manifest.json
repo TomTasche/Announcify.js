@@ -1,28 +1,24 @@
 {
-  "name": "Announcify Your Web",
+  "name": "Announcify",
   "version": "0.1",
   "description": "Listen to your web",
   "icons": { "16": "img/icon_16.png",
              "48": "img/icon_48.png",
             "128": "img/icon_128.png" },
 
-  // http://code.google.com/chrome/extensions/browserAction.html
   "browser_action": {
     "default_icon":  "img/icon_19.png",
     "default_title": "Announcify!"
   },
 
-  // http://code.google.com/chrome/extensions/manifest.html#permissions
   "permissions": [
     "https://www.diffbot.com/api/*",
-    "tts", // http://code.google.com/chrome/extensions/tts.html
+    "tts",
     "tabs"
   ],
 
-  /* http://code.google.com/chrome/extensions/options.html */
   "options_page": "html/options/options.html",
 
-  /* http://code.google.com/chrome/extensions/background_pages.html */
   "background_page": "html/background.html"
   
   /* "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src *; img-src 'self'" */

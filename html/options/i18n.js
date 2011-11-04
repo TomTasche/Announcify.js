@@ -14,8 +14,12 @@ this.i18n = {
     
     // tabs
     "tts": {
-        "en": "Text to Speech",
+        "en": "Text-To-Speech",
         "de": "Sprachsynthese"
+    },
+    "authorization": {
+        "en": "Authorization",
+        "de": "Authorisierung"
     },
     
     // sections    
@@ -27,10 +31,17 @@ this.i18n = {
         "en": "Details",
         "de": "Details"
     },
-    "details": {
-        "en": "Details",
-        "de": "Details"
+    
+    
+    "auth": {
+        "en": "Authorize",
+        "de": "Authorisieren"
     },
+    "auth_label": {
+        "en": "Allow Announcify to access your data on several other services",
+        "de": "Authorisieren"
+    },
+    
 
     // main
     "voice": {
