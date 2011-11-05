@@ -41,6 +41,13 @@ this.i18n = {
         "en": "Allow Announcify to access your data on several other services",
         "de": "Authorisieren"
     },
+    "notifications": {
+        "en": "Announcifications"
+    },
+    "interval": {
+        "en": "Interval",
+        "de": "Intervall"
+    },
     
 
     // main

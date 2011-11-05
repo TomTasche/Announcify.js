@@ -11,6 +11,21 @@ this.manifest = {
         "label": i18n.get("auth_label"),
         "text": i18n.get("auth")
     },
+    // Notifications
+    {
+        "tab": i18n.get("notifications"),
+        "group": i18n.get("general"),
+        "name": "interval",
+        "type": "slider",
+        "label": i18n.get("interval"),
+        "max": 600,
+        "min": 5,
+        "step": 1,
+        "display": true,
+        "displayModifier": function(value) {
+            return value + " seconds";
+        }
+    },
     // Text-To-Speech
     {
         "tab": i18n.get("tts"),

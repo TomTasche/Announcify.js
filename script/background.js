@@ -1,7 +1,8 @@
 window.onload = function() {
 	var settings = new Store("settings", {
 	    "rate": 1,
-		"volume": 1
+		"volume": 1,
+        "interval": 60
 	});
 
 	chrome.browserAction.onClicked.addListener(function (tab) {
@@ -18,22 +19,5 @@ window.onload = function() {
 		localStorage.openedSettings = true;
 	}
     
-    if (localStorage.authorized === null) {
-        window.setInterval(100000, getAnnouncifications);
-    }
+    startInterval();
 };
-
-
-function getAnnouncifications() {
-    var url = SERVER_URL + "announcifications";
-    var request = {
-        'method': 'GET',
-        'parameters': {
-            // 'alt': 'json'
-        }
-    };
-    
-    oauth.sendSignedRequest(url, function(resp, xhr) {
-        announcify(resp);
-    }, request);
-}

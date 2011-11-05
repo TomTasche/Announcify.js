@@ -79,17 +79,7 @@ window.addEvent("domready", function() {
     });
     settings.manifest.auth.addEvent("action", function() {
         oauth.authorize(function() {
-            var url = SERVER_URL + "announcifications";
-            var request = {
-                'method': 'GET',
-                'parameters': {
-                    // 'alt': 'json'
-                }
-            };
-            
-            oauth.sendSignedRequest(url, function(resp, xhr) {
-                announcify(resp);
-            }, request);
+            window.open(SERVER_URL + "authorize");
         });
     });
     
