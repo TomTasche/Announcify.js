@@ -13,6 +13,7 @@
 
   "permissions": [
     "https://www.diffbot.com/api/*",
+    "https://announcify-engine.appspot.com/*",
     "tts",
     "tabs"
   ],
@@ -20,6 +21,6 @@
   "options_page": "html/options/options.html",
 
   "background_page": "html/background.html"
-  
+
   /* "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src *; img-src 'self'" */
 }

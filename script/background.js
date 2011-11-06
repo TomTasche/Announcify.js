@@ -18,6 +18,4 @@ window.onload = function() {
 
 		localStorage.openedSettings = true;
 	}
-    
-    startInterval();
 };

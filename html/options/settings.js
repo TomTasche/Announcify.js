@@ -7,13 +7,13 @@ window.addEvent("domready", function() {
             settings.manifest[params.name] = output;
         }
     });
-    
+
     voiceSettings = settings.manifest.voices;
     ttsVoices = [];
     var addVoices = function(voicesToAdd) {
             ttsVoices = voicesToAdd;
             select = voiceSettings.element;
-            
+
             select.length = 0;
             if (voicesToAdd.length === 0) {
                 install = confirm("There's no Text-To-Speech engine installed on your system. Do you want to install one from Chrome Web Store?");
@@ -25,7 +25,7 @@ window.addEvent("domready", function() {
                 }
                 return;
             }
-            
+
             for (var i = 0; i < voicesToAdd.length; i++) {
                 v = voicesToAdd[i];
                 // console.log('  name: ' + v.voiceName);
@@ -47,11 +47,11 @@ window.addEvent("domready", function() {
                 }
             }
         };
-        
+
     settings.manifest.save_settings.addEvent("action", function() {
         for (var f in settings.manifest) {
             var s = settings.manifest[f];
-            
+
             try {
                 localStorage[f] = s.get();
             }
@@ -82,6 +82,6 @@ window.addEvent("domready", function() {
             window.open(SERVER_URL + "authorize");
         });
     });
-    
+
     chrome.tts.getVoices(addVoices);
 });
