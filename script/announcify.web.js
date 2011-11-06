@@ -2,10 +2,6 @@ var API_TOKEN = "b72fef8077d8741f511f929533291683";
 var API_URL = "https://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
 var API_URL_APPENDIX = "&html=true";
 
-var settings = new Store("settings", {
-    "rate": 1
-});
-
 var lastIndex = -1;
 var lang;
 var paragraphs;
