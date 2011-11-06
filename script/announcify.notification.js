@@ -21,6 +21,6 @@ function getAnnouncifications() {
     }, request);
 }
 
-window.addEvent("domready", function() {
+addLoadEvent(function() {
     window.setInterval(settings.get("interval") * 1000, getAnnouncifications);
 });

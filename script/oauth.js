@@ -1,4 +1,4 @@
-window.addEvent("domready", function() {
+addLoadEvent(function() {
     var SERVER_URL = "https://announcify-engine.appspot.com/";
     var oauth = ChromeExOAuth.initBackgroundPage({
         'request_url': SERVER_URL + "_ah/OAuthGetRequestToken",

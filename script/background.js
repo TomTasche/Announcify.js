@@ -1,4 +1,4 @@
-window.onload = function() {
+addLoadEvent(function() {
 	var settings = new Store("settings", {
 	    "rate": 1,
 		"volume": 1,
@@ -18,4 +18,4 @@ window.onload = function() {
 
 		localStorage.openedSettings = true;
 	}
-};
+});

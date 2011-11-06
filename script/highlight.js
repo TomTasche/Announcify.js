@@ -1,8 +1,3 @@
-
-window.onload = function(){
-	
-};
-
 function hideLoading() {
     loading = document.getElementById("img_loading");
     document.body.removeChild(loading);
@@ -56,11 +51,11 @@ function scrollToParagraph(index){
 	var offtop = node.offsetTop;
 	var height = (node.offsetHeight);
 	var screenheight = (window.innerHeight);
-	
+
 	scrollDest = offtop + (height / 2) - (screenheight / 2);
-	
+
 	window.scrollTo(0,scrollDest);
-	
+
 }
 
 
