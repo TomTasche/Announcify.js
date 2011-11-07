@@ -31,7 +31,7 @@ function ChromeExOAuth(url_request_token, url_auth_token, url_access_token,
   this.key_token = "oauth_token";
   this.key_token_secret = "oauth_token_secret";
   this.callback_page = opt_args && opt_args['callback_page'] ||
-      "chrome_ex_oauth.html";
+      "html/chrome_ex_oauth.html";
   this.auth_params = {};
   if (opt_args && opt_args['auth_params']) {
     for (key in opt_args['auth_params']) {
