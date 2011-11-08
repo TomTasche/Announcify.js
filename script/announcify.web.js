@@ -54,15 +54,15 @@ function displayArticle(article) {
 }
 
 function speak() {
-    announcify("You're now listening to: " + getTitle(), "en-US");
+    announcify("You're now listening to: " + getTitle(), "en-US", onUtteranceCompleted);
     lang = getParameter("lang");
-    paragraphs = document.getElementsByTagName("p", lang, onUtteranceCompleted);
+    paragraphs = document.getElementsByTagName("p");
 }
 
 function onUtteranceCompleted(event) {
     if (event.type == "end") {
         lastIndex++;
-        announcify(paragraphs[lastIndex].innerText);
+        announcify(paragraphs[lastIndex].innerText, lang, onUtteranceCompleted);
         highlight(lastIndex);
     }
 }
