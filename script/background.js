@@ -1,21 +1,23 @@
-window.onload = function() {
-	var settings = new Store("settings", {
-	    "rate": 1,
-		"volume": 1
-	});
+if (localStorage.openedSettings == null) {
+	window.open(chrome.extension.getURL("html/options.html"));
 
-	chrome.browserAction.onClicked.addListener(function (tab) {
-		chrome.tabs.detectLanguage(tab.id, function (language) {
-			url = chrome.extension.getURL("html/announcify.html") + "?url=" + escape(tab.url) + "&lang=" + language;
-
-			window.open(url, "announcify.web");
-		});
-	});
-
-
-	if (localStorage.openedSettings == null) {
-		window.open(chrome.extension.getURL("html/options/options.html"));
-
-		localStorage.openedSettings = true;
-	}
+	localStorage.openedSettings = true;
 }
+
+function getSelectionAndAnnouncify() {
+	url = chrome.extension.getURL("html/announcify.web.html") + "?lang=" + lang;
+
+	if (!window.getSelection().anchorNode) {
+		url += "&url=" + escape(window.location.href);
+	} else {
+		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
+	}
+
+	window.open(url, "announcify.web");
+}
+
+chrome.browserAction.onClicked.addListener(function (tab) {
+	chrome.tabs.detectLanguage(tab.id, function (language) {
+		chrome.tabs.executeScript(tab.id, {code: "var tabId = " + tab.id + "; var lang = '" + language + "'; " + getSelectionAndAnnouncify.toString() + " getSelectionAndAnnouncify();"});
+	});
+});
