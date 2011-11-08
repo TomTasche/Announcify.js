@@ -21,7 +21,7 @@ function getParameter(name) {
 
 function fetchArticle() {
     chrome.tts.speak("");
-    if (getParameter("warmedUp") == "") {
+    if (getParameter("warmedUp") === "") {
         window.location.href = window.location.href + "&warmedUp=true";
         return;
     }
@@ -54,7 +54,7 @@ function displayArticle(article) {
 }
 
 function speak() {
-    speak("You're now listening to: " + getTitle(), "en-US");
+    announcify("You're now listening to: " + getTitle(), "en-US");
     lang = getParameter("lang");
     paragraphs = document.getElementsByTagName("p", lang, onUtteranceCompleted);
 }
@@ -62,7 +62,7 @@ function speak() {
 function onUtteranceCompleted(event) {
     if (event.type == "end") {
         lastIndex++;
-        speak(paragraphs[lastIndex].innerText);
+        announcify(paragraphs[lastIndex].innerText);
         highlight(lastIndex);
     }
 }
