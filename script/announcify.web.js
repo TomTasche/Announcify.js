@@ -1,5 +1,5 @@
 var API_TOKEN = "b72fef8077d8741f511f929533291683";
-var API_URL = "https://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
+var API_URL = "http://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
 var API_URL_APPENDIX = "&html=true";
 
 var lastIndex = -1;

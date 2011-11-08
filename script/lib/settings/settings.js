@@ -83,10 +83,10 @@ window.addEvent("domready", function() {
     });
     settings.manifest.auth.addEvent("action", function() {
 	if (backgroundPage.oauth.hasToken()) {
-		window.open(backgroundPage.SERVER_URL + "authorize");
+		window.location.href = backgroundPage.SERVER_URL + "authorize";
 	} else {
 		backgroundPage.oauth.authorize(function() {
-			window.open(backgroundPage.SERVER_URL + "authorize");
+			window.location.href = backgroundPage.SERVER_URL + "authorize";
 	        });
 	}
     });
