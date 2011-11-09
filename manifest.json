@@ -18,7 +18,7 @@
         "tts",
         "https://www.diffbot.com/api/*",
         "https://announcify-engine.appspot.com/*",
-	"*://*/*"
+	    "*://*/*"
     ],
 
     "options_page": "html/options.html",

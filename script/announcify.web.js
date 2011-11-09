@@ -12,7 +12,7 @@ function getParameter(name) {
     regexS = "[\\?&]" + name + "=([^&#]*)";
     regex = new RegExp(regexS);
     results = regex.exec(window.location.href);
-    if (results == null) {
+    if (!results) {
         return "";
     } else {
         return results[1];
@@ -21,27 +21,27 @@ function getParameter(name) {
 
 function fetchArticle() {
     chrome.tts.speak("");
-    if (getParameter("warmedUp") == "") {
+    if (!getParameter("warmedUp")) {
         window.location.href = window.location.href + "&warmedUp=true";
         return;
     }
 
     url = getParameter("url");
 	if (url) {
-    request = new XMLHttpRequest();
-    request.open('GET', API_URL + url + API_URL_APPENDIX, true);
-    request.onreadystatechange = function(event) {
-        if (request.readyState == 4) {
-            if (request.status == 200) {
-                article = JSON.parse(request.responseText);
-                displayArticle(article);
+        request = new XMLHttpRequest();
+        request.open('GET', API_URL + url + API_URL_APPENDIX, true);
+        request.onreadystatechange = function(event) {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    article = JSON.parse(request.responseText);
+                    displayArticle(article);
+                } else {
+                    var confirmReload = window.confirm("Something went wrong. :/ Do you want to reload and try again?");
+                    if (confirmReload) window.location.reload(true);
+                }
             }
-            else {
-                console.log('Error', request.statusText);
-            }
-        }
-    };
-    request.send(null);
+        };
+        request.send(null);
 	} else {
 		article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
 		displayArticle(article);
@@ -59,15 +59,25 @@ function displayArticle(article) {
 }
 
 function speak() {
-    announcify("You're now listening to: " + getTitle(), "en-US", onUtteranceCompleted);
+    announcify.announcify("You're now listening to: " + getTitle(), "en-US", onUtteranceCompleted);
     lang = getParameter("lang");
     paragraphs = document.getElementsByTagName("p");
+}
+
+function getNodeText(node) {
+    var text = "";
+
+    while (node) {
+        text += node.innerText;
+
+        node = node.nextSibling;
+    }
 }
 
 function onUtteranceCompleted(event) {
     if (event.type == "end") {
         lastIndex++;
-        announcify(paragraphs[lastIndex].innerText, lang, onUtteranceCompleted);
+        announcify.announcify(paragraphs[lastIndex].innerText, lang, onUtteranceCompleted);
         highlight(lastIndex);
     }
 }

@@ -18,7 +18,7 @@ window.addEvent("domready", function() {
 
             select.length = 0;
             if (voicesToAdd.length === 0) {
-                install = confirm("There's no Text-To-Speech engine installed on your system. Do you want to install one from Chrome Web Store?");
+                install = window.confirm("There's no Text-To-Speech engine installed on your system. Do you want to install one from Chrome Web Store?");
                 if (install === true) {
                     window.location.href = "https://chrome.google.com/webstore/detail/jcabofbhfighebggomnamjankeaplmhn";
                 }

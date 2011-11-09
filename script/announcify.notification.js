@@ -12,9 +12,9 @@ function getAnnouncifications() {
         temp = resp.split(";joppfm;");
 
         for (i = 0; i < temp.length; i++) {
-            if (temp[i] == null) return;
+            if (!temp[i]) return;
 
-            announcify(temp[i]);
+            announcify.announcify(temp[i]);
         }
     }, request);
 }
