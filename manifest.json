@@ -17,10 +17,11 @@
         "tabs",
         "tts",
         "https://www.diffbot.com/api/*",
-        "https://announcify-engine.appspot.com/*"
+        "https://announcify-engine.appspot.com/*",
+	"*://*/*"
     ],
 
-    "options_page": "html/options/options.html",
+    "options_page": "html/options.html",
 
     "background_page": "html/background.html"
 }

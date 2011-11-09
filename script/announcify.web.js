@@ -1,5 +1,5 @@
 var API_TOKEN = "b72fef8077d8741f511f929533291683";
-var API_URL = "https://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
+var API_URL = "http://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
 var API_URL_APPENDIX = "&html=true";
 
 var lastIndex = -1;
@@ -12,7 +12,7 @@ function getParameter(name) {
     regexS = "[\\?&]" + name + "=([^&#]*)";
     regex = new RegExp(regexS);
     results = regex.exec(window.location.href);
-    if (results === null) {
+    if (results == null) {
         return "";
     } else {
         return results[1];
@@ -21,11 +21,13 @@ function getParameter(name) {
 
 function fetchArticle() {
     chrome.tts.speak("");
-    if (getParameter("warmedUp") === "") {
+    if (getParameter("warmedUp") == "") {
         window.location.href = window.location.href + "&warmedUp=true";
         return;
     }
+
     url = getParameter("url");
+	if (url) {
     request = new XMLHttpRequest();
     request.open('GET', API_URL + url + API_URL_APPENDIX, true);
     request.onreadystatechange = function(event) {
@@ -40,6 +42,10 @@ function fetchArticle() {
         }
     };
     request.send(null);
+	} else {
+		article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
+		displayArticle(article);
+	}
 }
 
 function displayArticle(article) {
@@ -47,7 +53,6 @@ function displayArticle(article) {
     articleDiv.setAttribute("id", "div_article");
     articleDiv.innerHTML = article.html;
     document.body.appendChild(articleDiv);
-    setDate(article.date);
     setTitle(article.title);
     hideLoading();
     speak();
@@ -67,8 +72,8 @@ function onUtteranceCompleted(event) {
     }
 }
 
-addLoadEvent(fetchArticle);
-
 window.onunload = function() {
     stop();
 };
+
+fetchArticle();

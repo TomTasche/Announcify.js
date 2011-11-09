@@ -1,6 +1,4 @@
 function getAnnouncifications() {
-    if (localStorage.authorized === null) return;
-
     var url = SERVER_URL + "announcifications";
     var request = {
         'method': 'GET',
@@ -14,13 +12,11 @@ function getAnnouncifications() {
         temp = resp.split(";joppfm;");
 
         for (i = 0; i < temp.length; i++) {
-            if (temp[i] === null) return;
+            if (temp[i] == null) return;
 
             announcify(temp[i]);
         }
     }, request);
 }
 
-addLoadEvent(function() {
-    window.setInterval(settings.get("interval") * 1000, getAnnouncifications);
-});
+window.setInterval(settings.get("interval") * 1000, getAnnouncifications);
