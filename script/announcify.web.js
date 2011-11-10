@@ -67,9 +67,9 @@ function speak() {
 
 function onUtteranceCompleted(event) {
     if (event.type == "end") {
-        var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
-
         lastIndex++;
+
+        var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
 
         ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
         highlight(lastIndex);
