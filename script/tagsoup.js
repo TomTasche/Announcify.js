@@ -1,4 +1,4 @@
-var tagsoup = (function() {
+var TAGSOUP = (function() {
     var regex = /<.*?>/g;
 
     return {

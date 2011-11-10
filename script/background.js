@@ -7,7 +7,7 @@ if (localStorage.openedSettings == null) {
 function getSelectionAndAnnouncify() {
 	url = chrome.extension.getURL("html/announcify.web.html") + "?lang=" + lang;
 
-	if (!window.getSelection().anchorNode) {
+	if (!window.getSelection().toString()) {
 		url += "&url=" + escape(window.location.href);
 	} else {
 		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);

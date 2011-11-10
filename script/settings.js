@@ -1,4 +1,4 @@
-var settings = new Store("settings", {
+var SETTINGS = new Store("settings", {
     "rate": 1,
     "volume": 1,
     "interval": 60

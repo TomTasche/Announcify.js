@@ -14,9 +14,9 @@ function getAnnouncifications() {
         for (i = 0; i < temp.length; i++) {
             if (!temp[i]) return;
 
-            announcify.announcify(temp[i]);
+            ANNOUNCIFY.announcify(temp[i]);
         }
     }, request);
 }
 
-window.setInterval(settings.get("interval") * 1000, getAnnouncifications);
+window.setInterval(SETTINGS.get("interval") * 1000, getAnnouncifications);

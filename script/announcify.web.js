@@ -60,18 +60,18 @@ function displayArticle(article) {
 }
 
 function speak() {
-    announcify.announcify("You're now listening to: " + getTitle(), "en-US", onUtteranceCompleted);
+    ANNOUNCIFY.announcify("You're now listening to: " + getTitle(), "en-US", onUtteranceCompleted);
     lang = getParameter("lang");
     paragraphs = document.getElementsByTagName("p");
 }
 
 function onUtteranceCompleted(event) {
     if (event.type == "end") {
-        var text = tagsoup.getText(paragraphs[lastIndex].innerHTML);
+        var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
 
         lastIndex++;
 
-        announcify.announcify(text, lang, onUtteranceCompleted);
+        ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
         highlight(lastIndex);
     }
 }

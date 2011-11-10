@@ -82,12 +82,12 @@ window.addEvent("domready", function() {
         });
     });
     settings.manifest.auth.addEvent("action", function() {
-	if (backgroundPage.oauth.hasToken()) {
+	if (backgroundPage.OAUTH.hasToken()) {
 		window.location.href = backgroundPage.SERVER_URL + "authorize";
 	} else {
-		backgroundPage.oauth.authorize(function() {
+		backgroundPage.OAUTH.authorize(function() {
 			window.location.href = backgroundPage.SERVER_URL + "authorize";
-	        });
+        });
 	}
     });
 
