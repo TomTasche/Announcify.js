@@ -3,18 +3,26 @@ var ANNOUNCIFICATIONS = (function() {
     var CHANNEL_URL = SERVER_URL + "channel";
 
     var GET_REQUEST = {
-        'method': 'GET',
-        'parameters': {
-            // 'alt': 'json'
-        }
+        'method': 'GET'
     };
     var DELETE_REQUEST = {
         'method': 'DELETE'
     };
     var CHANNEL_REQUEST = {
-        'method': 'GET'
+        'method': 'GET',
+        'parameters': {
+            'device': 'chrome'
+        }
     };
 
+    var CREATE_SOCKET = function(token) {
+        channel = new goog.appengine.Channel(token);
+        socket = channel.open();
+        socket.onopen = ONOPENED;
+        socket.onmessage = ONMESSAGE;
+        socket.onerror = ONERROR;
+        socket.onclose = ONCLOSED;
+    };
     var ONOPENED = function() {
         connected = true;
     };
@@ -27,8 +35,9 @@ var ANNOUNCIFICATIONS = (function() {
         socket.close();
     };
     var ONCLOSED = function() {
-        socket = null;
-        channel = null;
+        connected = false;
+
+        setTimeout(ANNOUNCIFICATIONS.openChannel, 1000);
     };
 
     var connected;
@@ -46,15 +55,6 @@ var ANNOUNCIFICATIONS = (function() {
 
 
     return {
-        var createSocket = function(token) {
-            channel = new goog.appengine.Channel(token);
-            socket = channel.open();
-            socket.onopen = ONOPENED;
-            socket.onmessage = ONMESSAGE;
-            socket.onerror = ONERROR;
-            socket.onclose = ONCLOSED;
-        }
-
         openChannel: function() {
             if (connected) return;
 
