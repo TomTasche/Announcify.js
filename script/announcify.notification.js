@@ -1,7 +1,13 @@
 var ANNOUNCIFICATIONS = (function() {
     var URL = SERVER_URL + "announcifications";
-    var REQUEST = {
+    var GET_REQUEST = {
         'method': 'GET',
+        'parameters': {
+            // 'alt': 'json'
+        }
+    };
+    var DELETE_REQUEST = {
+        'method': 'DELETE',
         'parameters': {
             // 'alt': 'json'
         }
@@ -28,6 +34,15 @@ var ANNOUNCIFICATIONS = (function() {
     var socket;
 
 
+    chrome.idle.onStateChanged.addListener(function(newState) {
+        if (newState == "active") {
+            getAnnouncifications();
+        } else {
+            // behave idle or locked...
+        }
+    });
+
+
     return {
         openChannel: function(token) {
             channel = new goog.appengine.Channel(token);
@@ -46,14 +61,29 @@ var ANNOUNCIFICATIONS = (function() {
 
         getAnnouncifications: function() {
             OAUTH.sendSignedRequest(URL, function(resp, xhr) {
-                var notification;
-                for (notification in JSON.parse(resp)) {
-                    if (!resp) return;
-                    ANNOUNCIFY.announcify(temp[i]);
+                var notifications = JSON.parse(resp);
+                var announce = [];
+
+                if (notifications.gmail > 0) {
+                    announce.push(notifications.gmail + " new Mails.");
                 }
-            }, REQUEST);
+                if (notifications.twitter > 0) {
+                    announce.push(notifications.twitter + " new Mentions on Twitter.");
+                }
+                if (notifications.facebook > 0) {
+                    announce.push(notifications.facebook + " new Notifications on Facebook.");
+                }
+
+                for (var notification in announce) {
+                    ANNOUNCIFY.announcify(notification);
+                }
+            }, GET_REQUEST);
+        },
+
+        resetAnnouncifications: function() {
+            OAUTH.sendSignedRequest(URL, function(resp, xhr) {
+                window.setTimeout(resetAnnouncifications, 1000);
+            }, DELETE_REQUEST);
         }
     };
 })();
-
-window.setInterval(SETTINGS.get("interval") * 1000, ANNOUNCIFICATIONS.getAnnouncifications);

@@ -77,7 +77,7 @@ function onUtteranceCompleted(event) {
 }
 
 window.onunload = function() {
-    stop();
+    ANNOUNCIFY.stop();
 };
 
 fetchArticle();
