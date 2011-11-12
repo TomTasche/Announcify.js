@@ -28,7 +28,7 @@ function fetchArticle() {
 
     url = getParameter("url");
     if (url) {
-        request = new XMLHttpRequest();
+        var request = new XMLHttpRequest();
         request.open('GET', API_URL + url + API_URL_APPENDIX, true);
         request.onreadystatechange = function(event) {
             if (request.readyState == 4) {

@@ -1,5 +1,7 @@
 var ANNOUNCIFICATIONS = (function() {
-    var URL = SERVER_URL + "announcifications";
+    var ANNOUNCIFICATIONS_URL = SERVER_URL + "announcifications";
+    var CHANNEL_URL = SERVER_URL + "channel";
+
     var GET_REQUEST = {
         'method': 'GET',
         'parameters': {
@@ -7,10 +9,10 @@ var ANNOUNCIFICATIONS = (function() {
         }
     };
     var DELETE_REQUEST = {
-        'method': 'DELETE',
-        'parameters': {
-            // 'alt': 'json'
-        }
+        'method': 'DELETE'
+    };
+    var CHANNEL_REQUEST = {
+        'method': 'GET'
     };
 
     var ONOPENED = function() {
@@ -44,13 +46,27 @@ var ANNOUNCIFICATIONS = (function() {
 
 
     return {
-        openChannel: function(token) {
+        var createSocket = function(token) {
             channel = new goog.appengine.Channel(token);
             socket = channel.open();
             socket.onopen = ONOPENED;
             socket.onmessage = ONMESSAGE;
             socket.onerror = ONERROR;
             socket.onclose = ONCLOSED;
+        }
+
+        openChannel: function() {
+            if (connected) return;
+
+            OAUTH.sendSignedRequest(CHANNEL_URL, function(resp, xhr) {
+                if (xhr.status == 200) {
+                    var token = JSON.parse(request.responseText);
+
+                    createSocket(token);
+                } else {
+                    setTimeout(openChannel, 1000);
+                }
+            }, CHANNEL_REQUEST);
         },
 
         sendMessage: function(message) {
@@ -60,18 +76,20 @@ var ANNOUNCIFICATIONS = (function() {
         },
 
         getAnnouncifications: function() {
-            OAUTH.sendSignedRequest(URL, function(resp, xhr) {
+            OAUTH.sendSignedRequest(ANNOUNCIFICATIONS_URL, function(resp, xhr) {
+                if (!resp || xhr.status != 200) return;
+
                 var notifications = JSON.parse(resp);
                 var announce = [];
 
                 if (notifications.gmail > 0) {
-                    announce.push(notifications.gmail + " new Mails.");
+                    announce.push(notifications.gmail + " new mails.");
                 }
                 if (notifications.twitter > 0) {
-                    announce.push(notifications.twitter + " new Mentions on Twitter.");
+                    announce.push(notifications.twitter + " new mentions on Twitter.");
                 }
                 if (notifications.facebook > 0) {
-                    announce.push(notifications.facebook + " new Notifications on Facebook.");
+                    announce.push(notifications.facebook + " new notifications on Facebook.");
                 }
 
                 for (var notification in announce) {
@@ -81,8 +99,10 @@ var ANNOUNCIFICATIONS = (function() {
         },
 
         resetAnnouncifications: function() {
-            OAUTH.sendSignedRequest(URL, function(resp, xhr) {
-                window.setTimeout(resetAnnouncifications, 1000);
+            OAUTH.sendSignedRequest(ANNOUNCIFICATIONS_URL, function(resp, xhr) {
+                if (xhr.status != 200) {
+                    window.setTimeout(resetAnnouncifications, 1000);
+                }
             }, DELETE_REQUEST);
         }
     };
