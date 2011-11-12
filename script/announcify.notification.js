@@ -1,22 +1,59 @@
-function getAnnouncifications() {
-    var url = SERVER_URL + "announcifications";
-    var request = {
+var ANNOUNCIFICATIONS = (function() {
+    var URL = SERVER_URL + "announcifications";
+    var REQUEST = {
         'method': 'GET',
         'parameters': {
             // 'alt': 'json'
         }
     };
 
-    oauth.sendSignedRequest(url, function(resp, xhr) {
-        // TODO: use JSON instead
-        temp = resp.split(";joppfm;");
+    var ONOPENED = function() {
+        connected = true;
+    };
+    var ONMESSAGE = function(data) {
+        ANNOUNCIFICATIONS.getAnnouncifications();
+    };
+    var ONERROR = function(error) {
+        connected = false;
 
-        for (i = 0; i < temp.length; i++) {
-            if (!temp[i]) return;
+        socket.close();
+    };
+    var ONCLOSED = function() {
+        socket = null;
+        channel = null;
+    };
 
-            ANNOUNCIFY.announcify(temp[i]);
+    var connected;
+    var channel;
+    var socket;
+
+
+    return {
+        openChannel: function(token) {
+            channel = new goog.appengine.Channel(token);
+            socket = channel.open();
+            socket.onopen = ONOPENED;
+            socket.onmessage = ONMESSAGE;
+            socket.onerror = ONERROR;
+            socket.onclose = ONCLOSED;
+        },
+
+        sendMessage: function(message) {
+            if (connected) {
+                // TODO: implement
+            }
+        },
+
+        getAnnouncifications: function() {
+            OAUTH.sendSignedRequest(URL, function(resp, xhr) {
+                var notification;
+                for (notification in JSON.parse(resp)) {
+                    if (!resp) return;
+                    ANNOUNCIFY.announcify(temp[i]);
+                }
+            }, REQUEST);
         }
-    }, request);
-}
+    };
+})();
 
-window.setInterval(SETTINGS.get("interval") * 1000, getAnnouncifications);
+window.setInterval(SETTINGS.get("interval") * 1000, ANNOUNCIFICATIONS.getAnnouncifications);
