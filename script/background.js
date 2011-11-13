@@ -30,3 +30,4 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 		chrome.tabs.executeScript(tab.id, {code: "var tabId = " + tab.id + "; var lang = '" + language + "'; " + getSelectionAndAnnouncify.toString() + " getSelectionAndAnnouncify();"});
 	});
 });
+

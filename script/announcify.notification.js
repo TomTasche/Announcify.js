@@ -20,3 +20,4 @@ function getAnnouncifications() {
 }
 
 window.setInterval(SETTINGS.get("interval") * 1000, getAnnouncifications);
+
