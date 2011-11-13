@@ -13,10 +13,6 @@ var ANNOUNCIFY = (function() {
         stop: function() {
             chrome.tts.stop();
         }
-
-        pause: function(){
-            console.log("Error: pause isn't working for now, because the 'word' event doesn't get fired!");
-        }
     };
 })();
 

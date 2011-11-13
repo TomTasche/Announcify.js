@@ -78,6 +78,7 @@ function onUtteranceCompleted(event) {
     }
 }
 
+
 window.onunload = function() {
    ANNOUNCIFY.stop();
 };
