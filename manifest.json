@@ -15,6 +15,7 @@
 
     "permissions": [
         "tabs",
+        "idle",
         "tts",
         "https://www.diffbot.com/api/*",
         "https://announcify-engine.appspot.com/*",

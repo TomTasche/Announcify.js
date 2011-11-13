@@ -53,8 +53,10 @@ var ANNOUNCIFICATIONS = (function() {
         }
     });
 
+<<<<<<< HEAD
 window.setInterval(SETTINGS.get("interval") * 1000, getAnnouncifications);
 
+=======
 
     return {
         openChannel: function() {
@@ -109,3 +111,4 @@ window.setInterval(SETTINGS.get("interval") * 1000, getAnnouncifications);
         }
     };
 })();
+>>>>>>> 21b7d70379bcf8476018d541f2d2518d8f06ade0

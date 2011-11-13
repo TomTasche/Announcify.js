@@ -80,6 +80,7 @@ function onUtteranceCompleted(event) {
 
 
 window.onunload = function() {
+<<<<<<< HEAD
    ANNOUNCIFY.stop();
 };
 
@@ -107,4 +108,9 @@ function onKeyUp(e){
         break;
     }
 }
+=======
+    ANNOUNCIFY.stop();
+};
 
+fetchArticle();
+>>>>>>> 21b7d70379bcf8476018d541f2d2518d8f06ade0
