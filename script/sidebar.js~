@@ -23,4 +23,3 @@ function arrowClick(){
 	}
 	isShown = !isShown;
 };
-
