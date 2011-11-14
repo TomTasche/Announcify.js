@@ -9,6 +9,11 @@ var paragraphs;
 document.addEventListener('keyup', onKeyUp, false);
 fetchArticle();
 
+var ANALYTICS = chrome.extensions.getBackgroundPage()._gaq;
+ANALYTICS.push(['_trackEvent', 'url', getParameter('url')]);
+ANALYTICS.push(['_trackEvent', 'lang', getParameter('lang')]);
+
+
 // from http://www.netlobo.com/url_query_string_javascript.html
 function getParameter(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -75,7 +80,8 @@ function onUtteranceCompleted(event) {
         var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
         ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
         highlight(lastIndex);
-    }
+    } else {
+	ANALYTICS.push(['_trackEvent', 'error', event]);
 }
 
 
@@ -92,6 +98,7 @@ function onKeyUp(e){
             var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
             ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
             highlight(lastIndex);
+	    ANALYTICS.push(['_trackEvent', 'key', 'up']);
         break;
 
         case 40:/*DOWN*/
@@ -100,6 +107,7 @@ function onKeyUp(e){
             var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
             ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
             highlight(lastIndex);
+	    ANALYTICS.push(['_trackEvent', 'key', 'down']);
         break;
 
         case 32: /*SPACE*/
@@ -107,4 +115,3 @@ function onKeyUp(e){
         break;
     }
 }
-
