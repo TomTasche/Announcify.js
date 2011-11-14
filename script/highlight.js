@@ -13,7 +13,7 @@ function setDate(date){
 
 function setTitle(title){
 	document.getElementById("heading").innerText=title;
-	document.title = title;
+	document.title = "Announcify - " + title;
 }
 
 function getTitle() {
