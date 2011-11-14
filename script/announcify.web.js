@@ -6,6 +6,9 @@ var lastIndex = -1;
 var lang;
 var paragraphs;
 
+document.addEventListener('keyup', onKeyUp, false);
+fetchArticle();
+
 // from http://www.netlobo.com/url_query_string_javascript.html
 function getParameter(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -70,14 +73,38 @@ function onUtteranceCompleted(event) {
         lastIndex++;
 
         var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
-
         ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
         highlight(lastIndex);
     }
 }
 
+
 window.onunload = function() {
-    ANNOUNCIFY.stop();
+   ANNOUNCIFY.stop();
 };
 
-fetchArticle();
+function onKeyUp(e){
+    console.log(e.keyCode);
+    switch(e.keyCode){
+        case 38:/*UP*/
+            lastIndex--;
+            ANNOUNCIFY.stop();
+            var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
+            ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
+            highlight(lastIndex);
+        break;
+
+        case 40:/*DOWN*/
+            lastIndex++;
+            ANNOUNCIFY.stop();
+            var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
+            ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
+            highlight(lastIndex);
+        break;
+
+        case 32: /*SPACE*/
+                
+        break;
+    }
+}
+

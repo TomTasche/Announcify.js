@@ -65,4 +65,3 @@ function highlight(index){
 	removeBlurEffect(index);
 	scrollToParagraph(index);
 }
-
