@@ -1,4 +1,4 @@
-if (localStorage.openedSettings == null) {
+if (localStorage.openedSettings) {
 	window.open(chrome.extension.getURL("html/options.html"));
 
 	localStorage.openedSettings = true;
@@ -26,7 +26,7 @@ function getSelectionAndAnnouncify() {
 		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
 	}
 
-    trackPage(selected);
+    chrome.extensions.getBackgroundPage().trackPage(selected);
 
 	window.open(url, "announcify.web");
 }

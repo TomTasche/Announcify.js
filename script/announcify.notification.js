@@ -53,8 +53,6 @@ var ANNOUNCIFICATIONS = (function() {
         }
     });
 
-window.setInterval(SETTINGS.get("interval") * 1000, getAnnouncifications);
-
 
     return {
         openChannel: function() {
