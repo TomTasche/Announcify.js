@@ -6,7 +6,7 @@ if (localStorage.openedSettings) {
 
 chrome.browserAction.onClicked.addListener(function (tab) {
     chrome.tabs.detectLanguage(tab.id, function (language) {
-		chrome.tabs.executeScript(tab.id, {code: getSelectionAndAnnouncify.toString() + "(" + language + ");"});
+		chrome.tabs.executeScript(tab.id, {code: getSelectionAndAnnouncify.toString() + "('" + language + "');"});
 	});
 });
 
