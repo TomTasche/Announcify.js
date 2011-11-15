@@ -71,7 +71,7 @@ window.addEvent("domready", function() {
             }
         }
 
-	backgroundPage.oauth.clearTokens();
+	backgroundPage.OAUTH.clearTokens();
     });
     settings.manifest.test.addEvent("action", function() {
         chrome.tts.speak("Thanks for using Announcify!", {
@@ -92,4 +92,6 @@ window.addEvent("domready", function() {
     });
 
     chrome.tts.getVoices(addVoices);
+    
+    backgroundPage._gaq.push(['_trackPageview']);
 });
