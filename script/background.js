@@ -23,7 +23,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
         trackPage(request);
     } else {
-        trackEvent(request.event);
+        trackEvent(request);
     }
 });
 
