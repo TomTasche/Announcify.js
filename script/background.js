@@ -26,7 +26,7 @@ function getSelectionAndAnnouncify() {
 		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
 	}
 
-    chrome.extensions.getBackgroundPage().trackPage(selected);
+    chrome.extension.getBackgroundPage().trackPage(selected);
 
 	window.open(url, "announcify.web");
 }
