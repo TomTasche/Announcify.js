@@ -4,30 +4,39 @@ if (localStorage.openedSettings == null) {
 	localStorage.openedSettings = true;
 }
 
-
-function getSelectionAndAnnouncify() {
-	url = chrome.extension.getURL("html/announcify.web.html") + "?lang=" + lang;
-	
-	if (!window.getSelection().toString()) {
-		url += "&url=" + escape(window.location.href);
-	} else {
-		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
-	}
-
-	window.open(url, "announcify.web");
-}
-
-function trackPage(){
-	var _gaq = _gaq || [];
-	var hostname = window.location.hostname;
-	_gaq.push(['_setAccount', 'UA-26989214-2']);
-	_gaq.push(['_trackEvent', 'extension-click', hostname]);
-	alert("track");
-}
-
 chrome.browserAction.onClicked.addListener(function (tab) {
-	chrome.tabs.detectLanguage(tab.id, function (language) {
+    chrome.tabs.detectLanguage(tab.id, function (language) {
 		chrome.tabs.executeScript(tab.id, {code: "var tabId = " + tab.id + "; var lang = '" + language + "'; " + getSelectionAndAnnouncify.toString() + " getSelectionAndAnnouncify();"});
 	});
 });
 
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    trackEvent(request.event);
+});
+
+
+function getSelectionAndAnnouncify() {
+	var url = chrome.extension.getURL("html/announcify.web.html") + "?lang=" + lang;
+    var selected = false;
+
+	if (!window.getSelection().toString()) {
+		url += "&url=" + escape(window.location.href);
+	} else {
+        selected = true;
+		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
+	}
+
+    trackPage(selected);
+
+	window.open(url, "announcify.web");
+}
+
+function trackPage(selected) {
+	analytics.push(['_trackEvent', 'announcify.web.domain', window.location.hostname]);
+    analytics.push(['_trackEvent', 'announcify.web.url', window.location.href]);
+    analytics.push(['_trackEvent', 'announcify.web.selected', selected]);
+}
+
+function trackEvent(event) {
+	analytics.push(['_trackEvent', 'announcify.web.' + event.name, event.value]);
+}

@@ -9,6 +9,13 @@ var paragraphs;
 document.addEventListener('keyup', onKeyUp, false);
 fetchArticle();
 
+chrome.extension.sendRequest({name: 'language', value: getParameter('lang')});
+
+window.onunload = function() {
+   ANNOUNCIFY.stop();
+};
+
+
 // from http://www.netlobo.com/url_query_string_javascript.html
 function getParameter(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -23,6 +30,7 @@ function getParameter(name) {
 }
 
 function fetchArticle() {
+    // TODO: ugly, but it seems to be necessary (onUtteranceCompleted not fired without warming up)
     chrome.tts.speak("");
     if (!getParameter("warmedUp")) {
         window.location.href = window.location.href + "&warmedUp=true";
@@ -46,8 +54,8 @@ function fetchArticle() {
             }
         };
         request.send(null);
-	} else {
-		article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
+    } else {
+        article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
 		displayArticle(article);
 	}
 }
@@ -75,36 +83,45 @@ function onUtteranceCompleted(event) {
         var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
         ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
         highlight(lastIndex);
+    } else {
+        chrome.extension.sendRequest({name: 'error', value: event});
     }
 }
 
+function onKeyUp(e) {
+    var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
 
-window.onunload = function() {
-   ANNOUNCIFY.stop();
-};
-
-function onKeyUp(e){
-    console.log(e.keyCode);
-    switch(e.keyCode){
+    switch(e.keyCode) {
         case 38:/*UP*/
             lastIndex--;
             ANNOUNCIFY.stop();
-            var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
+
             ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
             highlight(lastIndex);
-        break;
+
+            chrome.extension.sendRequest({name: 'key', value: 'up'});
+            break;
 
         case 40:/*DOWN*/
             lastIndex++;
             ANNOUNCIFY.stop();
-            var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
+
             ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
             highlight(lastIndex);
-        break;
+
+            chrome.extension.sendRequest({name: 'key', value: 'down'});
+            break;
 
         case 32: /*SPACE*/
-                
-        break;
+            chrome.tts.isSpeaking(function(speaking) {
+                if (speaking) {
+                    ANNOUNCIFY.stop();
+                } else {
+                    ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
+                }
+            });
+
+            chrome.extension.sendRequest({name: 'key', value: 'space'});
+            break;
     }
 }
-
