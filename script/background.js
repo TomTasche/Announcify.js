@@ -42,11 +42,11 @@ function getSelectionAndAnnouncify(language) {
 }
 
 function trackPage(request) {
-	analytics.push(['_trackEvent', 'announcify.web.domain', window.location.hostname]);
-    analytics.push(['_trackEvent', 'announcify.web.url', window.location.href]);
-    analytics.push(['_trackEvent', 'announcify.web.selected', selected]);
+	_gaq.push(['_trackEvent', 'announcify.web.domain', window.location.hostname]);
+    _gaq.push(['_trackEvent', 'announcify.web.url', window.location.href]);
+    _gaq.push(['_trackEvent', 'announcify.web.selected', selected]);
 }
 
 function trackEvent(event) {
-	analytics.push(['_trackEvent', 'announcify.web.' + event.name, event.value]);
+	_gaq.push(['_trackEvent', 'announcify.web.' + event.name, event.value]);
 }
