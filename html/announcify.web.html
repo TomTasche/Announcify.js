@@ -1,44 +1,66 @@
 <!doctype html>
 
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-    <title>Announcify</title>
-    <base target="_blank">
+        <title>Announcify</title>
+        <base target="_blank">
 
-    <link rel="icon" type="image/x-icon" href="img/icon_16.ico" />
-    <link rel="stylesheet" type="text/css" href="../style/announcify.web.css" />
+        <link rel="icon" type="image/x-icon" href="img/icon_16.ico" />
+        <link rel="stylesheet" type="text/css" href="../style/announcify.web.css" />
 
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/lib/settings/store.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/settings.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/lib/settings/store.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/settings.js"></script>
 
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/highlight.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/tagsoup.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/announcify.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/sidebar.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8" src="../script/announcify.web.js" defer="defer"></script>
-  </head>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/highlight.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/tagsoup.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/announcify.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/sidebar.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8" src="../script/announcify.web.js" defer="defer"></script>
 
-  <body>
-	<div id="titlebar">
-		<h1 id="heading"></h1>
-	</div>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-26989214-2']);
+            _gaq.push(['_trackPageview']);
 
-  <div id="sidebar">
-    <div id="arrow">
-      <div id="arrow_img"></div>
-    </div>
-    <ul>
-      <a href="https://chrome.google.com/webstore/detail/mmiolkcfamcbpoandjpnefiegkcpeoan" title="Rate at Chrome Store">
-        <li>Rate us at Chrome Webstore</li>
-      </a>
-      <a href="http://www.google.com" title="Get more apps"><li>Get more apps</li></a>
-    </ul>
-  </div>
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = 'https://ssl.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
 
-    <div id="img_loading" align="center">
-        <img src="../img/loading.gif" alt="Loading..."></img>
-    </div>
-  </body>
+    <body>
+        <div id="titlebar">
+            <h1 id="heading"></h1>
+        </div>
+
+        <div id="sidebar">
+            <div id="arrow">
+                <div id="arrow_img"></div>
+            </div>
+            <ul>
+                <a href="https://chrome.google.com/webstore/detail/mmiolkcfamcbpoandjpnefiegkcpeoan" title="Give feedback">
+                    <li><b>Give feedback on Chrome Webstore</b></li>
+                </a>
+
+                <li>Created by:</li>
+                <a href="https://plus.google.com/110382868498576404279" title="Dominic Bartl">
+                    <li>Dominic Bartl</li>
+                </a>
+                <a href="https://plus.google.com/117897956157296937864" title="Kariem Hussein">
+                    <li>Kariem Hussein</li>
+                </a>
+                <a href="https://plus.google.com/108466870039650470305" title="Thomas Taschauer">
+                    <li>Thomas Taschauer</li>
+                </a>
+            </ul>
+        </div>
+
+        <div id="img_loading" align="center">
+            <img src="../img/loading.gif" alt="Loading..."></img>
+        </div>
+    </body>
 </html>
