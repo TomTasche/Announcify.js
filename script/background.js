@@ -42,9 +42,9 @@ function getSelectionAndAnnouncify(language) {
 }
 
 function trackPage(request) {
-	_gaq.push(['_trackEvent', 'announcify.web.domain', window.location.hostname]);
-    _gaq.push(['_trackEvent', 'announcify.web.url', window.location.href]);
-    _gaq.push(['_trackEvent', 'announcify.web.selected', selected]);
+	_gaq.push(['_trackEvent', 'announcify.web.domain', request.hostname]);
+    _gaq.push(['_trackEvent', 'announcify.web.url', request.url]);
+    _gaq.push(['_trackEvent', 'announcify.web.selected', request.selected]);
 }
 
 function trackEvent(event) {
