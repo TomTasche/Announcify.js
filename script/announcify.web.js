@@ -39,15 +39,16 @@ function fetchArticle() {
 
     setTitle(unescape(getParameter("title")));
 
+    var article;
     var url = getParameter("url");
     var selected = getParameter("selected");
     if (!selected) {
-        var request = new XMLHttpRequest();
-        request.open('GET', API_URL + url + API_URL_APPENDIX, true);
-        request.onreadystatechange = function(event) {
-            if (request.readyState == 4) {
-                if (request.status == 200) {
-                    article = JSON.parse(request.responseText);
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', API_URL + url + API_URL_APPENDIX, true);
+        xhr.onreadystatechange = function(event) {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    article = JSON.parse(xhr.responseText);
 
                     displayArticle(article);
                 } else {
@@ -56,7 +57,7 @@ function fetchArticle() {
                 }
             }
         };
-        request.send(null);
+        xhr.send(null);
     } else {
         article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
 		displayArticle(article);
