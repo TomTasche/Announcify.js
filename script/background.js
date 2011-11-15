@@ -1,12 +1,12 @@
 if (localStorage.openedSettings) {
-	window.open(chrome.extension.getURL("html/options.html"));
+    window.open(chrome.extension.getURL("html/options.html"));
 
-	localStorage.openedSettings = true;
+    localStorage.openedSettings = true;
 }
 
 chrome.browserAction.onClicked.addListener(function (tab) {
     chrome.tabs.detectLanguage(tab.id, function (language) {
-		chrome.tabs.executeScript(tab.id, {code: "var tabId = " + tab.id + "; var lang = '" + language + "'; " + getSelectionAndAnnouncify.toString() + " getSelectionAndAnnouncify();"});
+		chrome.tabs.executeScript(tab.id, {code: getSelectionAndAnnouncify.toString() + "(" + language + ");"});
 	});
 });
 

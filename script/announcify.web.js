@@ -37,6 +37,8 @@ function fetchArticle() {
         return;
     }
 
+    setTitle(unescape(getParameter("title")));
+
     var url = getParameter("url");
     var selected = getParameter("selected");
     if (!selected) {
@@ -46,7 +48,6 @@ function fetchArticle() {
             if (request.readyState == 4) {
                 if (request.status == 200) {
                     article = JSON.parse(request.responseText);
-                    article.title = unescape(getParameter("title"));
 
                     displayArticle(article);
                 } else {
@@ -67,7 +68,6 @@ function displayArticle(article) {
     articleDiv.setAttribute("id", "div_article");
     articleDiv.innerHTML = article.html;
     document.body.appendChild(articleDiv);
-    setTitle(article.title);
     hideLoading();
     speak();
 }
