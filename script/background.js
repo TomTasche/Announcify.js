@@ -11,27 +11,37 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    trackEvent(request.event);
+    if (request.type == 'announcify.web') {
+        var url = chrome.extension.getURL("html/announcify.web.html") + "?lang=" + request.lang;
+        url += '&url=' + request.url + '&title=' + request.title + '&selected=' + request.selected;
+
+        if (request.selected) {
+            url += '&text=' + request.text;
+        }
+
+        window.open(url, "announcify.web");
+
+        trackPage(request);
+    } else {
+        trackEvent(request.event);
+    }
 });
 
 
-function getSelectionAndAnnouncify() {
-	var url = chrome.extension.getURL("html/announcify.web.html") + "?lang=" + lang;
-    var selected = false;
+function getSelectionAndAnnouncify(language) {
+	var request = {type: 'announcify.web', selected: false, lang: language};
+    request.hostname = window.location.hostname;
+    request.url = window.location.href;
+    request.title = escape(document.title);
 
-	if (!window.getSelection().toString()) {
-		url += "&url=" + escape(window.location.href);
-	} else {
-        selected = true;
-		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
+	if (window.getSelection().toString()) {
+		request.text = escape(window.getSelection().toString());
 	}
 
-    chrome.extension.getBackgroundPage().trackPage(selected);
-
-	window.open(url, "announcify.web");
+    chrome.extension.sendRequest(request);
 }
 
-function trackPage(selected) {
+function trackPage(request) {
 	analytics.push(['_trackEvent', 'announcify.web.domain', window.location.hostname]);
     analytics.push(['_trackEvent', 'announcify.web.url', window.location.href]);
     analytics.push(['_trackEvent', 'announcify.web.selected', selected]);

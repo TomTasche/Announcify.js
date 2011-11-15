@@ -9,7 +9,7 @@ var paragraphs;
 document.addEventListener('keyup', onKeyUp, false);
 fetchArticle();
 
-chrome.extension.sendRequest({name: 'language', value: getParameter('lang')});
+chrome.extension.sendRequest({type: 'track', name: 'language', value: getParameter('lang')});
 
 window.onunload = function() {
    ANNOUNCIFY.stop();
@@ -37,14 +37,16 @@ function fetchArticle() {
         return;
     }
 
-    url = getParameter("url");
-    if (url) {
+    var url = getParameter("url");
+    var selected = getParameter("selected");
+    if (!selected) {
         var request = new XMLHttpRequest();
         request.open('GET', API_URL + url + API_URL_APPENDIX, true);
         request.onreadystatechange = function(event) {
             if (request.readyState == 4) {
                 if (request.status == 200) {
                     article = JSON.parse(request.responseText);
+                    article.title = unescape(getParameter("title"));
 
                     displayArticle(article);
                 } else {
@@ -84,7 +86,7 @@ function onUtteranceCompleted(event) {
         ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
         highlight(lastIndex);
     } else {
-        chrome.extension.sendRequest({name: 'error', value: event});
+        chrome.extension.sendRequest({type: 'track', name: 'error', value: event});
     }
 }
 
@@ -92,14 +94,14 @@ function onKeyUp(e) {
     var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
 
     switch(e.keyCode) {
-        case 38:/*UP*/
+        case 38: /*UP*/
             lastIndex--;
             ANNOUNCIFY.stop();
 
             ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
             highlight(lastIndex);
 
-            chrome.extension.sendRequest({name: 'key', value: 'up'});
+            chrome.extension.sendRequest({type: 'track', name: 'key', value: 'up'});
             break;
 
         case 40:/*DOWN*/
@@ -109,7 +111,7 @@ function onKeyUp(e) {
             ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
             highlight(lastIndex);
 
-            chrome.extension.sendRequest({name: 'key', value: 'down'});
+            chrome.extension.sendRequest({type: 'track', name: 'key', value: 'down'});
             break;
 
         case 32: /*SPACE*/
@@ -121,7 +123,7 @@ function onKeyUp(e) {
                 }
             });
 
-            chrome.extension.sendRequest({name: 'key', value: 'space'});
+            chrome.extension.sendRequest({type: 'track', name: 'key', value: 'space'});
             break;
     }
 }
