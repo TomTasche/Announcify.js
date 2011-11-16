@@ -7,13 +7,14 @@ var lang;
 var paragraphs;
 var _done = false;
 
+ANNOUNCIFY.setEventListener(onUtteranceCompleted);
+
+fetchArticle();
+
 document.addEventListener("keyup", onKeyUp, false);
 document.getElementById("backward").addEventListener("click", previous, false);
 document.getElementById("play").addEventListener("click", pause, false);
 document.getElementById("forward").addEventListener("click", next, false);
-fetchArticle();
-
-ANNOUNCIFY.setEventListener(onUtteranceCompleted);
 
 chrome.extension.sendRequest({type: 'track', name: 'language', value: getParameter('lang')});
 
@@ -48,7 +49,7 @@ function fetchArticle() {
     var article;
     var url = getParameter("url");
     var selected = getParameter("selected");
-    if (!selected) {
+    if (selected == 'false') {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', API_URL + url + API_URL_APPENDIX, true);
         xhr.onreadystatechange = function(event) {
