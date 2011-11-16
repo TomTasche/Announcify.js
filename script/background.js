@@ -26,7 +26,7 @@ function getSelectionAndAnnouncify() {
 		url += "&text=" + escape(window.getSelection().toString()) + "&title=" + escape(document.title);
 	}
 
-    trackPage(selected);
+    //trackPage(selected);
 
 	window.open(url, "announcify.web");
 }
