@@ -81,14 +81,14 @@ body{
 #sidebar{
 	border-right:4px solid #D2D2D2;
 	border-bottom:4px solid #D2D2D2;
+	border-top:4px solid #D2D2D2;
 	float:left;
-	position:absolute;
+	position:fixed;
 	background-color:white;
-	left:0px;
+	top:100px;
 	width:250px;
 	left:-250px;
 	font-size:13px;
-
 }
 
 #sidebar #arrow{
@@ -96,6 +96,7 @@ body{
 	height:70px;
 	float:right;
 	margin-right:-46px; /*Negative width*/
+	margin-top:-4px;
 	background-color:lightgray;
 	cursor:pointer;
 	padding:0px auto;
@@ -109,23 +110,38 @@ body{
 	background-position: center left;
 }
 
-#sidebar ul{
+
+#sidebar #controls{
+	border:1px solid red;
+	list-style-type: none;
+	padding:0px;
+}
+
+
+
+#sidebar #controls li{
+	display:inline;
+	padding-left:20px;
+}
+
+
+#sidebar #links{
 	line-height: 30px;
 	list-style-type: none;
 	cursor:pointer;
 	padding:0px;
 }
 
-#sidebar ul a{
+#links a{
 	text-decoration: none;
 	color:#232323;
 }
 
-#sidebar ul li{
+#links li{
 	padding-left:20px;
 }
 
-#sidebar ul li:hover{
+#links li:hover{
 	background-color:lightgray;
 }
 

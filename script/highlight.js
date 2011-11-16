@@ -24,23 +24,33 @@ var index = 0;
 
 function removeBlurEffect(index){
 	var p = document.getElementsByTagName('p')[index];
-	p.setAttribute("class","blur_in");
-	var as = p.getElementsByTagName('a');
+	if(p.getAttribute("class").indexOf("blur_out") != -1){
+		p.setAttribute("class","blur_in");
+		var as = p.getElementsByTagName('a');
 		for (var i = 0; i < as.length; i++) {
 			as[i].setAttribute('class', 'blur_in');
 		}
+	}
 }
 
-function blurEverything(){
+function blurEverything(index){
 	var pis = document.getElementsByTagName('p');
 	for (var i = 0; i < pis.length; i++) {
-		pis[i].setAttribute('class', 'blur_out');
-		var as = pis[i].getElementsByTagName('a');
-		for (var j = 0; j < as.length; j++) {
-			as[j].setAttribute('class', 'blur_out');
+		if(i != index){
+			pis[i].setAttribute('class', 'blur_out');
+			var as = pis[i].getElementsByTagName('a');
+			for (var j = 0; j < as.length; j++) {
+				as[j].setAttribute('class', 'blur_out');
+			}
 		}
 	}
+}
 
+function done(length){
+	for (var i = 0; i < length; i++) {
+		removeBlurEffect(i);
+		scrollToParagraph(0);
+	};
 }
 
 var interval;
@@ -61,7 +71,7 @@ function scrollToParagraph(index){
 
 
 function highlight(index){
-	blurEverything();
+	blurEverything(index);
 	removeBlurEffect(index);
 	scrollToParagraph(index);
 }

@@ -5,9 +5,15 @@ var API_URL_APPENDIX = "&html=true";
 var lastIndex = -1;
 var lang;
 var paragraphs;
+var _done = false;
 
-document.addEventListener('keyup', onKeyUp, false);
+document.addEventListener("keyup", onKeyUp, false);
+document.getElementById("backward").addEventListener("click", previous, false);
+document.getElementById("play").addEventListener("click", pause, false);
+document.getElementById("forward").addEventListener("click", next, false);
 fetchArticle();
+
+ANNOUNCIFY.setEventListener(onUtteranceCompleted);
 
 chrome.extension.sendRequest({type: 'track', name: 'language', value: getParameter('lang')});
 
@@ -74,57 +80,91 @@ function displayArticle(article) {
 }
 
 function speak() {
-    ANNOUNCIFY.announcify("You're now listening to: " + getTitle(), "en-US", onUtteranceCompleted);
+    ANNOUNCIFY.announcify("You're now listening to: " + getTitle(), "en-US");
     lang = getParameter("lang");
     paragraphs = document.getElementsByTagName("p");
 }
 
 function onUtteranceCompleted(event) {
     if (event.type == "end") {
-        lastIndex++;
-
-        var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
-        ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
-        highlight(lastIndex);
+       next(false);
     } else {
         chrome.extension.sendRequest({type: 'track', name: 'error', value: event});
     }
 }
 
+
+function next(shouldStop){
+	console.log(lastIndex + " from " + paragraphs.length);
+	if(lastIndex < paragraphs.length-1){
+    	if(shouldStop)
+    	    ANNOUNCIFY.stop();
+
+    	lastIndex++;
+
+    	var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
+    	ANNOUNCIFY.announcify(text, lang);
+    	highlight(lastIndex);
+    }else{
+    	done(paragraphs.length);
+    	lastIndex = -1;
+    	_done = true;
+    }
+}
+
+function previous(){
+	if(lastIndex > 0){
+    	lastIndex--;
+    	var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
+
+    	ANNOUNCIFY.stop();
+    	ANNOUNCIFY.announcify(text, lang);
+    	highlight(lastIndex);
+	}
+}
+
+function pause(){
+    if(!_done)
+    	if(ANNOUNCIFY.isPaused())
+        	ANNOUNCIFY.continue();
+    	else
+        	ANNOUNCIFY.pause();
+    else{
+    	speak();
+    	_done = false;
+    }
+}
+
+
+
+
 function onKeyUp(e) {
-    var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
-
     switch(e.keyCode) {
-        case 38: /*UP*/
-            lastIndex--;
-            ANNOUNCIFY.stop();
-
-            ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
-            highlight(lastIndex);
-
+        case 38:/*UP*/
+            previous();
             chrome.extension.sendRequest({type: 'track', name: 'key', value: 'up'});
             break;
 
         case 40:/*DOWN*/
-            lastIndex++;
-            ANNOUNCIFY.stop();
-
-            ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
-            highlight(lastIndex);
-
+            next(true);
             chrome.extension.sendRequest({type: 'track', name: 'key', value: 'down'});
             break;
 
         case 32: /*SPACE*/
-            chrome.tts.isSpeaking(function(speaking) {
-                if (speaking) {
-                    ANNOUNCIFY.stop();
-                } else {
-                    ANNOUNCIFY.announcify(text, lang, onUtteranceCompleted);
-                }
-            });
-
+            pause();
             chrome.extension.sendRequest({type: 'track', name: 'key', value: 'space'});
             break;
     }
+
+
 }
+
+
+document.onkeydown = function(e) {
+    //Prevent scrolling
+    if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 32) {
+          e.preventDefault();
+          return false;
+    }
+    return true;
+};
