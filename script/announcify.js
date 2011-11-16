@@ -59,7 +59,6 @@ var ANNOUNCIFY = (function() {
             } else if(e.type == "interrupted"){
             
             }
-            console.log(e.type);
             listener(e);
         },
 
