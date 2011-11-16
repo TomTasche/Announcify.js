@@ -1,4 +1,4 @@
-if (localStorage.openedSettings) {
+if (!localStorage.openedSettings) {
     window.open(chrome.extension.getURL("html/options.html"));
 
     localStorage.openedSettings = true;
