@@ -82,6 +82,9 @@ window.addEvent("domready", function() {
         });
     });
     settings.manifest.auth.addEvent("action", function() {
+    	window.alert('This isn\'t yet ready for your eyes. Sorry! :(');
+    	return;
+    	
 	if (backgroundPage.OAUTH.hasToken()) {
 		window.location.href = backgroundPage.SERVER_URL + "authorize";
 	} else {
