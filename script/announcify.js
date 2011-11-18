@@ -1,13 +1,11 @@
 var ANNOUNCIFY = (function() {
-
-    var listener = function(e){};
+    var listener = function(e) {};
 
     var isSpeaking = false;
     var isPaused = false;
     var lastText = "";
 
     return {
-
         announcify: function(text, lang) {
             rate = SETTINGS.get("rate");
             pitch = SETTINGS.get("pitch");
@@ -25,17 +23,19 @@ var ANNOUNCIFY = (function() {
         stop: function() {
             isSpeaking = false;
             isPaused = false;
+            
             chrome.tts.stop();
         },
 
-        pause: function(){
+        pause: function() {
             isSpeaking = false;
             isPaused = true;
+            
             chrome.tts.stop();
         },
 
-        continue: function(){
-            if(isPaused){
+        continue: function() {
+            if (isPaused){
                 rate = SETTINGS.get("rate");
                 pitch = SETTINGS.get("pitch");
                 volume = SETTINGS.get("volume");
@@ -46,30 +46,30 @@ var ANNOUNCIFY = (function() {
                 // TODO: use lang. at the moment it simply breaks everything, because current TTS-Engines expect "en-US" instead of "en"
                 chrome.tts.speak(lastText, {"enqueue": true, "rate": rate, "pitch": pitch, "voiceName": voice, "onEvent": this.callback});
             }
+            
             isPaused = false;
         },
 
-        setEventListener: function(mycallback){
+        setEventListener: function(mycallback) {
             listener = mycallback;
         },
 
-        callback: function(e){57
+        callback: function(e) {
             if (e.type == "end") {
             
             } else if(e.type == "interrupted"){
             
             }
+            
             listener(e);
         },
 
-        isSpeaking: function(){
+        isSpeaking: function() {
             return isSpeaking;
         },
 
-        isPaused: function(){
+        isPaused: function() {
             return isPaused;
         }
-
     };
 })();
-

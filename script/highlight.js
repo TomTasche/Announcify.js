@@ -23,6 +23,8 @@ function getTitle() {
 var index = 0;
 
 function removeBlurEffect(index){
+	if (index < 0) return;
+
 	var p = document.getElementsByTagName('p')[index];
 	if(p.getAttribute("class").indexOf("blur_out") != -1){
 		p.setAttribute("class","blur_in");

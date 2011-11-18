@@ -122,8 +122,11 @@ body{
 	margin-right:20px;
 }
 
-
+<<<<<<< HEAD
 #sidebar .badge img:active{
+=======
+#sidebar #store img:active{
+>>>>>>> 5c1dac78ee041fb53af71f4be36c04b42b5b4a10
 	-webkit-transform:scale(0.9);
 }
 

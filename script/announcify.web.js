@@ -94,9 +94,7 @@ function onUtteranceCompleted(event) {
     }
 }
 
-
 function next(shouldStop){
-	console.log(lastIndex + " from " + paragraphs.length);
 	if(lastIndex < paragraphs.length-1){
     	if(shouldStop)
     	    ANNOUNCIFY.stop();
