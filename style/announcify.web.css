@@ -3,7 +3,6 @@ body{
 	margin:0px;
 	padding:0px;
 	font-family: Verdana, "MS Trebuchet", sans-serif;
-
 }
 
 #titlebar{
@@ -84,46 +83,67 @@ body{
 	border-top:4px solid #D2D2D2;
 	float:left;
 	position:fixed;
+	height:60%;
 	background-color:white;
-	top:100px;
 	width:250px;
 	left:-250px;
 	font-size:13px;
+	padding:10px;
+	font-family: "MS Trebuchet", sans-serif;
 }
 
-#sidebar #arrow{
-	width:46px;
-	height:70px;
-	float:right;
-	margin-right:-46px; /*Negative width*/
-	margin-top:-4px;
-	background-color:lightgray;
-	cursor:pointer;
-	padding:0px auto;
-}
-
-#sidebar #arrow_img{
-	width:46px;
-	height:70px;
-	background-image:url("../img/arrow.png");
-	background-repeat: no-repeat;
-	background-position: center left;
-}
 
 
 #sidebar #controls{
-	border:1px solid red;
 	list-style-type: none;
 	padding:0px;
 }
 
 
-
 #sidebar #controls li{
 	display:inline;
 	padding-left:20px;
+	cursor:pointer;
 }
 
+#sidebar #controls li img:hover{
+	-webkit-transform:scale(1.2);
+}
+
+#sidebar #controls li img:active{
+	-webkit-transform:scale(1.1);
+}
+
+
+
+
+
+#sidebar #store a{
+	text-decoration: none;
+	font-weight: bold;
+	color: #454545;
+}
+
+
+#sidebar #store img{
+	margin-right:20px;
+	margin-bottom:20px;
+	border: 1px solid lightgray;
+}
+
+#sidebar #store img:active{
+	-webkit-transform:scale(0.9);
+}
+
+
+#sidebar #creators{
+	position: absolute;
+	bottom:2px;
+}
+
+#sidebar h3{
+	clear:both;
+}
 
 #sidebar #links{
 	line-height: 30px;
@@ -138,11 +158,17 @@ body{
 }
 
 #links li{
-	padding-left:20px;
+	padding:10px;
+	display:inline;
 }
 
-#links li:hover{
-	background-color:lightgray;
+#links li img{
+	width:60px;
+	height:60px;
+}
+
+#links li img:hover{
+	-webkit-transform:scale(1.4);
 }
 
 

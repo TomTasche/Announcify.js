@@ -94,9 +94,7 @@ function onUtteranceCompleted(event) {
     }
 }
 
-
 function next(shouldStop){
-	console.log(lastIndex + " from " + paragraphs.length);
 	if(lastIndex < paragraphs.length-1){
     	if(shouldStop)
     	    ANNOUNCIFY.stop();
@@ -110,6 +108,7 @@ function next(shouldStop){
     	done(paragraphs.length);
     	lastIndex = -1;
     	_done = true;
+        document.getElementById("play").firstChild.setAttribute("src", "../img/controls/play.png");
     }
 }
 
@@ -125,13 +124,17 @@ function previous(){
 }
 
 function pause(){
-    if(!_done)
-    	if(ANNOUNCIFY.isPaused())
+    if(!_done){
+    	if(ANNOUNCIFY.isPaused()){
         	ANNOUNCIFY.continue();
-    	else
+            document.getElementById("play").firstChild.setAttribute("src", "../img/controls/pause.png");
+    	}else{
         	ANNOUNCIFY.pause();
-    else{
+            document.getElementById("play").firstChild.setAttribute("src", "../img/controls/play.png");
+        }
+    }else{
     	speak();
+        document.getElementById("play").firstChild.setAttribute("src", "../img/controls/pause.png");
     	_done = false;
     }
 }
