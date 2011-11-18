@@ -23,6 +23,15 @@ window.onunload = function() {
 };
 
 
+// from: http://stackoverflow.com/questions/4825295/javascript-onclick-get-the-id-of-the-button-clicked/4825339#4825339
+function trackClick(event) {
+	event = window.event;
+
+	var element = event.target || event.srcElement;
+
+	chrome.extension.sendRequest({type: 'track', name: 'click', value: element.alt});
+}
+
 // from http://www.netlobo.com/url_query_string_javascript.html
 function getParameter(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
