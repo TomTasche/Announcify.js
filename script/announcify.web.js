@@ -46,6 +46,8 @@ function getParameter(name) {
 }
 
 function fetchArticle() {
+    var article;
+	
     // TODO: ugly, but it seems to be necessary (onUtteranceCompleted not fired without warming up)
     chrome.tts.speak("");
     if (!getParameter("warmedUp")) {
@@ -65,19 +67,25 @@ function fetchArticle() {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     article = JSON.parse(xhr.responseText);
-
-                    displayArticle(article);
                 } else {
                     var confirmReload = window.confirm("Something went wrong. :/ Do you want to reload and try again?");
                     if (confirmReload) window.location.reload(true);
+                    
+                    return;
                 }
             }
         };
         xhr.send(null);
+    } else if (window.intent) {
+    	var intent = window.intent;
+    	// TODO: if (intent.type == 'text/html') {}
+    	
+	article = {html: intent.data};
     } else {
         article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
-		displayArticle(article);
-	}
+    }
+    
+    displayArticle(article);
 }
 
 function displayArticle(article) {
