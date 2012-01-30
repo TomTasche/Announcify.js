@@ -29,18 +29,22 @@ body{
 }
 
 #div_article a{
-	
+
 	text-decoration:none;
 }
 
-#div_article img{ 
-    float: left; 
-    margin: 10px; 
+#div_article img{
+    float: left;
+    margin: 10px;
 }
 
 #img_loading{
 	float: none;
 	margin: 150px auto;
+}
+
+#div_ad{
+    float: right;
 }
 
 
@@ -83,7 +87,7 @@ body{
 	border-top:4px solid #D2D2D2;
 	float:left;
 	position:fixed;
-	
+
 	background-color:white;
 	width:250px;
 	left:-250px;

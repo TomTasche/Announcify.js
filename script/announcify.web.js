@@ -47,7 +47,7 @@ function getParameter(name) {
 
 function fetchArticle() {
     var article;
-	
+
     // TODO: ugly, but it seems to be necessary (onUtteranceCompleted not fired without warming up)
     chrome.tts.speak("");
     if (!getParameter("warmedUp")) {
@@ -70,7 +70,7 @@ function fetchArticle() {
                 } else {
                     var confirmReload = window.confirm("Something went wrong. :/ Do you want to reload and try again?");
                     if (confirmReload) window.location.reload(true);
-                    
+
                     return;
                 }
             }
@@ -79,12 +79,12 @@ function fetchArticle() {
     } else if (window.intent) {
     	var intent = window.intent;
     	// TODO: if (intent.type == 'text/html') {}
-    	
+
 	article = {html: intent.data};
     } else {
         article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
     }
-    
+
     displayArticle(article);
 }
 
@@ -157,6 +157,13 @@ function pause(){
 }
 
 
+function disableAds() {
+    if (window.confirm('So, you want to disable my ads?`Y U NO support me?\nHowever, I respect your decision.')) {
+        localStorage.setItem('disableAds', true);
+    } else {
+        window.alert('Good decision! Here\'s some candy for you: https://endoftheinter.net/');
+    }
+}
 
 
 function onKeyUp(e) {
@@ -176,10 +183,7 @@ function onKeyUp(e) {
             chrome.extension.sendRequest({type: 'track', name: 'key', value: 'space'});
             break;
     }
-
-
 }
-
 
 document.onkeydown = function(e) {
     //Prevent scrolling
