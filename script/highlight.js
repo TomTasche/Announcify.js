@@ -1,26 +1,19 @@
+var scrollDest;
+
+
 function hideLoading() {
-    loading = document.getElementById("img_loading");
+    var loading = document.getElementById("img_loading");
     document.body.removeChild(loading);
 }
 
-function setIconPath(path){
-	//document.getElementById("favico").setAttribute("src",path);
-}
-
-function setDate(date){
-	var node = document.getElementById("date");
-}
-
 function setTitle(title){
-	document.getElementById("heading").innerText=title;
-	document.title = "Announcify - " + title;
+    document.getElementById("heading").innerText=title;
+    document.title = "Announcify - " + title;
 }
 
 function getTitle() {
     return document.getElementById("heading").innerText;
 }
-
-var index = 0;
 
 function removeBlurEffect(index){
 	if (index < 0) return;
@@ -51,13 +44,9 @@ function blurEverything(index){
 function done(length){
 	for (var i = 0; i < length; i++) {
 		removeBlurEffect(i);
-		scrollToParagraph(0);
-	};
+		// scrollToParagraph(0);
+	}
 }
-
-var interval;
-var speed = 10;
-var scrollDest;
 
 function scrollToParagraph(index){
 	var node = document.getElementsByTagName('p')[index];
@@ -67,10 +56,9 @@ function scrollToParagraph(index){
 
 	scrollDest = offtop + (height / 2) - (screenheight / 2);
 
-	window.scrollTo(0,scrollDest);
+	window.scrollTo(0, scrollDest);
 
 }
-
 
 function highlight(index){
 	blurEverything(index);
