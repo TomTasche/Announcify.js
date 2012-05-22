@@ -42,6 +42,8 @@ function getSelectionAndAnnouncify(language) {
 }
 
 function trackPage(request) {
+    _gaq.push(['_trackPageview']);
+    
 	_gaq.push(['_trackEvent', 'announcify.web.domain', request.hostname]);
     _gaq.push(['_trackEvent', 'announcify.web.url', request.url]);
     _gaq.push(['_trackEvent', 'announcify.web.selected', request.selected]);

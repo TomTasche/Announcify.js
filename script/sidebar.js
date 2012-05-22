@@ -20,4 +20,17 @@ function mouseover(){
 		sidebar.setAttribute("class","sidebar_show");
 	}
 	isShown = !isShown;
-};
+}
+
+function disableAds() {
+    if (window.confirm('So, you want to disable my ads? Y U NO support me?\nHowever, I respect your decision.')) {
+        removeAds();
+        
+        localStorage.setItem('disableAds', true);
+    }
+}
+
+function removeAds() {
+    var adDiv = document.getElementById('div_ad');
+    adDiv.parentNode.removeChild(adDiv);
+}

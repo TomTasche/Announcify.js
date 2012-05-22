@@ -156,16 +156,6 @@ function pause(){
     }
 }
 
-
-function disableAds() {
-    if (window.confirm('So, you want to disable my ads?`Y U NO support me?\nHowever, I respect your decision.')) {
-        localStorage.setItem('disableAds', true);
-    } else {
-        window.alert('Good decision! Here\'s some candy for you: https://endoftheinter.net/');
-    }
-}
-
-
 function onKeyUp(e) {
     switch(e.keyCode) {
         case 38:/*UP*/

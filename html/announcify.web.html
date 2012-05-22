@@ -83,8 +83,7 @@
             if (!localStorage.getItem('disableAds')) {
                 var z=document.createElement("script");z.type="text/javascript";z.async=true;z.src="http://engine.adzerk.net/z/13179/azk1_2_6";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z, s);
             } else {
-                var adDiv = document.getElementById('div_ad');
-                adDiv.parentNode.removeChild(adDiv);
+                removeAds();
             }
         </script>
     </body>
