@@ -1,7 +1,8 @@
 {
     "name": "Announcify",
-    "version": "0.2",
+    "version": "0.2.1",
     "description": "Listen to your web",
+    "manifest_version": 2,
     "icons": {
         "16": "img/icon_16.png",
         "48": "img/icon_48.png",
@@ -24,5 +25,7 @@
 
     "options_page": "html/options.html",
 
-    "background_page": "html/background.html"
+    "background": {
+    	"page": "html/background.html"
+    }
 }

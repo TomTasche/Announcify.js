@@ -67,6 +67,8 @@ function fetchArticle() {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     article = JSON.parse(xhr.responseText);
+
+                    displayArticle(article);
                 } else {
                     var confirmReload = window.confirm("Something went wrong. :/ Do you want to reload and try again?");
                     if (confirmReload) window.location.reload(true);
@@ -80,15 +82,19 @@ function fetchArticle() {
     	var intent = window.intent;
     	// TODO: if (intent.type == 'text/html') {}
 
-	article = {html: intent.data};
+    	article = {html: intent.data};
+
+        displayArticle(article);
     } else {
         article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
+        
+        displayArticle(article);
     }
-
-    displayArticle(article);
 }
 
 function displayArticle(article) {
+	article.html = article.html.replace("&nbsp", "");
+	
     articleDiv = document.createElement("div");
     articleDiv.setAttribute("id", "div_article");
     articleDiv.innerHTML = article.html;
