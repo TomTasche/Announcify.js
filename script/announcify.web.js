@@ -2,9 +2,11 @@ var API_TOKEN = "b72fef8077d8741f511f929533291683";
 var API_URL = "http://www.diffbot.com/api/article?token=" + API_TOKEN + "&url=";
 var API_URL_APPENDIX = "&html=true";
 
+var highlightIndex = -1;
 var lastIndex = -1;
 var lang;
 var paragraphs;
+var toReadTags = ["P", "OL", "UL"]
 var _done = false;
 
 ANNOUNCIFY.setEventListener(onUtteranceCompleted);
@@ -46,7 +48,6 @@ function getParameter(name) {
 }
 
 function fetchArticle() {
-    var article;
 
     // TODO: ugly, but it seems to be necessary (onUtteranceCompleted not fired without warming up)
     chrome.tts.speak("");
@@ -55,7 +56,8 @@ function fetchArticle() {
         return;
     }
 
-    setTitle(unescape(getParameter("title")));
+    // Using deprecated unescape due to non-UTF8 encoding (http://stackoverflow.com/a/19696946)
+    setTitle(decodeURIComponent(unescape(getParameter("title"))));
 
     var article;
     var url = getParameter("url");
@@ -70,7 +72,8 @@ function fetchArticle() {
 
                     displayArticle(article);
                 } else {
-                    var confirmReload = window.confirm("Something went wrong. :/ Do you want to reload and try again?");
+                    var confirmReload = window.confirm(
+                        "Something went wrong. :/ Do you want to reload and try again?");
                     if (confirmReload) window.location.reload(true);
 
                     return;
@@ -86,14 +89,15 @@ function fetchArticle() {
 
         displayArticle(article);
     } else {
-        article = {html: "<p>" + unescape(getParameter("text")) + "</p>", title: unescape(getParameter("title"))};
+        article = {html: "<p>" + decodeURIComponent(unescape(getParameter("text"))) +
+                   "</p>", title: decodeURIComponent(unescape(getParameter("title")))};
         
         displayArticle(article);
     }
 }
 
 function displayArticle(article) {
-	article.html = article.html.replace("&nbsp", "");
+	article.html = article.html.replace(/&nbsp;/gi,'');
 	
     articleDiv = document.createElement("div");
     articleDiv.setAttribute("id", "div_article");
@@ -106,7 +110,20 @@ function displayArticle(article) {
 function speak() {
     ANNOUNCIFY.announcify("You're now listening to: " + getTitle(), "en-US");
     lang = getParameter("lang");
-    paragraphs = document.getElementsByTagName("p");
+    // Iterate through all elements with a tag matching in the toReadTags list.
+    // pFound is a sentinel value so that the first element of 'paragraphs' will always have tag 'P'
+    paragraphs = [];
+    var allElements = document.getElementsByTagName("*");
+    var pFound = false;
+    for (var i= 0, max=allElements.length; i < max; i++){
+        currentTag = allElements[i].tagName;
+        if (currentTag == "P" || pFound) {
+            pFound = true;
+            if (toReadTags.indexOf(currentTag) != -1) {
+                paragraphs.push(allElements[i])
+            }
+        }
+    }
 }
 
 function onUtteranceCompleted(event) {
@@ -122,14 +139,20 @@ function next(shouldStop){
     	if(shouldStop)
     	    ANNOUNCIFY.stop();
 
-    	lastIndex++;
+        // The highlightIndex moves only for P, this is so that highlight.js works correctly.
+        // As a side effect, for a long list the page will not move until the next paragraph starts.
+        lastIndex++;
+        if (paragraphs[lastIndex].tagName == "P") {
+            highlightIndex++;
+        }
 
     	var text = TAGSOUP.getText(paragraphs[lastIndex].innerHTML);
     	ANNOUNCIFY.announcify(text, lang);
-    	highlight(lastIndex);
+    	highlight(highlightIndex);
     }else{
     	done(paragraphs.length);
     	lastIndex = -1;
+        highlightIndex = -1;
     	_done = true;
         document.getElementById("play").firstChild.setAttribute("src", "../img/controls/play.png");
     }
@@ -150,10 +173,12 @@ function pause(){
     if(!_done){
     	if(ANNOUNCIFY.isPaused()){
         	ANNOUNCIFY.continue();
-            document.getElementById("play").firstChild.setAttribute("src", "../img/controls/pause.png");
+            document.getElementById("play").firstChild.setAttribute("src",
+                                                                    "../img/controls/pause.png");
     	}else{
         	ANNOUNCIFY.pause();
-            document.getElementById("play").firstChild.setAttribute("src", "../img/controls/play.png");
+            document.getElementById("play").firstChild.setAttribute("src",
+                                                                    "../img/controls/play.png");
         }
     }else{
     	speak();
